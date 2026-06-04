@@ -16,7 +16,7 @@ app.get('/cards', (req, res) => {
     })
 })
 
-app.get('/card/:id', (req, res) => {
+app.get('/cards/:id', (req, res) => {
     readCard(req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err.message)
@@ -27,7 +27,7 @@ app.get('/card/:id', (req, res) => {
     })
 })
 
-app.post('/card', (req, res) => {
+app.post('/cards', (req, res) => {
     const { name, description } = req.body
     createCard(name, description, (err, data) => {
         if (err) {
@@ -39,7 +39,7 @@ app.post('/card', (req, res) => {
     })
 })
 
-app.put('/card/:id', (req, res) => {
+app.put('/cards/:id', (req, res) => {
     const { name, description } = req.body
     updateCard(req.params.id, name, description, (err) => {
         if (err) {
@@ -51,7 +51,7 @@ app.put('/card/:id', (req, res) => {
     })
 })
 
-app.delete('/card/:id', (req, res) => {
+app.delete('/cards/:id', (req, res) => {
     deleteCard(req.params.id, (err) => {
         if (err) {
             res.status(500).send(err.message)
