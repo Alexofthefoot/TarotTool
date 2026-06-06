@@ -13,7 +13,7 @@ let db = new sqlite3.Database(dbname, (err) => {
 
         db.run(`CREATE TABLE IF NOT EXISTS cards (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 name TEXT NOT NULL UNIQUE, 
-                arcana TEXT NOT NULL CHECK (arcana IN ('Major', 'Minor')),
+                arcana TEXT CHECK (arcana IN ('Major', 'Minor')),
                 suit TEXT,
                 rank TEXT,
                 rank_number INTEGER,

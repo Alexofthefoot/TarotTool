@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require("express")
 const { createCard, readCard, readAllCards, updateCard, deleteCard } = require('./crud')
 const app = express()
 
@@ -28,8 +28,8 @@ app.get('/cards/:id', (req, res) => {
 })
 
 app.post('/cards', (req, res) => {
-    const { name, description } = req.body
-    createCard(name, description, (err, data) => {
+    const { name, deck_order } = req.body
+    createCard(name, deck_order, (err, data) => {
         if (err) {
             res.status(500).send(err.message)
         }
@@ -40,8 +40,8 @@ app.post('/cards', (req, res) => {
 })
 
 app.put('/cards/:id', (req, res) => {
-    const { name, description } = req.body
-    updateCard(req.params.id, name, description, (err) => {
+    const { name, deck_order } = req.body
+    updateCard(req.params.id, name, deck_order, (err) => {
         if (err) {
             res.status(500).send(err.message)
         }
