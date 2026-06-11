@@ -7,7 +7,8 @@ const cardController = require('../controllers/cardController');
 const cardRouter = express.Router(); // returns a middleware..instance?
 
 cardRouter.route('/')
-.get(cardController.getAllCards);
+.get(cardController.getAllCards)
+.post(cardController.createCard);
 
 // cardRouter.route('/:id')
 // .get(cardController.getOne)

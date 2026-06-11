@@ -27,9 +27,3 @@ const deleteCard = (id, callback) => {
 }
 
 
-module.exports = { 
-    createCard,
-    readCard,
-    updateCard,
-    deleteCard
-}   
