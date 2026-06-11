@@ -4,15 +4,15 @@
 const express = require('express');
 const cardController = require('../controllers/cardController');
 
-const cardRouter = express.Router(); // returns a middleware..instance?
-
+const cardRouter = express.Router();
 cardRouter.route('/')
 .get(cardController.getAllCards)
 .post(cardController.createCard);
 
-// cardRouter.route('/:id')
-// .get(cardController.getOne)
-// .delete(cardController.deleteOne);
+cardRouter.route('/:id')
+.get(cardController.getCard)
+.put(cardController.updateCard)
+.delete(cardController.deleteCard);
 
 
 module.exports = cardRouter;

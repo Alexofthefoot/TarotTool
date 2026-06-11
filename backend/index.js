@@ -19,70 +19,17 @@
 
 
 const express = require('express');
-const cardRouter  = require('./routes/cardRouter.js') 
+const cardRouter  = require('./routes/cardRouter.js');
 
 // CREATE THE EXPRESS APP
-const app = express()
+const app = express();
 
 // USING MIDDLEWARE
-app.use(express.json())
+app.use(express.json());
 
 // MOUTING EACH ROUTE
 app.use('/api/v1/cards', cardRouter);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000')
-})  
-
-
-
-
-
-
-
-
-// app.get('/cards/:id', (req, res) => {
-//     readCard(req.params.id, (err, row) => {
-//         if (err) {
-//             res.status(500).send(err.message)
-//         }
-//         else {
-//             res.status(200).json(row)
-//         }
-//     })
-// })
-
-// app.post('/cards', (req, res) => {
-//     const { name, deck_order } = req.body
-//     createCard(name, deck_order, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err.message)
-//         }
-//         else {
-//             res.status(201).send(`Card is added ID : ${data.id}`)
-//         }
-//     })
-// })
-
-// app.put('/cards/:id', (req, res) => {
-//     const { name, deck_order } = req.body
-//     updateCard(req.params.id, name, deck_order, (err) => {
-//         if (err) {
-//             res.status(500).send(err.message)
-//         }
-//         else {
-//             res.status(200).send(`Card with ID : ${req.params.id} is updated`)
-//         }
-//     })
-// })
-
-// app.delete('/cards/:id', (req, res) => {
-//     deleteCard(req.params.id, (err) => {
-//         if (err) {
-//             res.status(500).send(err.message)
-//         }
-//         else {
-//             res.status(200).send(`Card with ID : ${req.params.id} is deleted`)
-//         }
-//     })
-// })
+});

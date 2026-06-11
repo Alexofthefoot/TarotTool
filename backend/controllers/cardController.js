@@ -45,8 +45,51 @@ function createCard(req, res) {
     })
 };
 
+function getCard(req, res) {
+    cardServices.getCard(req.params.id, (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        }
+        else if (!rows) {
+            res.status(404).send('Card does not exist in DB');
+        }
+        else {
+            res.status(200).json(rows);
+        }
+    })
+};
+
+function updateCard(req, res) {
+    const { name, deck_order } = req.body;
+    cardServices.updateCard(req.params.id, name, deck_order, (err) => {
+        if (err) {
+            res.status(500).send(err.message);
+        }
+        else {
+            res.status(200).send(`Card with ID : ${req.params.id} is updated`)
+        }
+    });
+};
+
+function deleteCard(req, res) {
+    cardServices.deleteCard(req.params.id, (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        }
+        else if (!rows) {
+            res.status(404).send('Card does not exist in DB');
+        }
+        else {
+            res.status(200).send(`Card with ID : ${req.params.id} is deleted`)
+        }
+    })
+};
+
 
 module.exports = {
-    getAllCards, 
-    createCard
+    getAllCards,
+    createCard,
+    getCard,
+    updateCard,
+    deleteCard
 }
