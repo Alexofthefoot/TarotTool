@@ -86,5 +86,3 @@ app.listen(3000, () => {
 //         }
 //     })
 // })
-
-//const { createCard, readCard, readAllCards, updateCard, deleteCard } = require('./crud')

@@ -14,6 +14,14 @@ const getAllCards = (callback) => {
     db.all(sql, [], callback);
 }
 
+const createCard = (name, deck_order, callback) => {
+    const sql = `INSERT INTO cards (name, deck_order) VALUES (?, ?)`;
+    db.run(sql, [name, deck_order], function (err) {
+        callback(err, { id: this.lastID })
+    })
+};
+
 module.exports = {
-    getAllCards
+    getAllCards, 
+    createCard
 }
