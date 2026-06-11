@@ -4,17 +4,6 @@
 //      deciding HTTP status codes
 //      sending JSON response
 //      error handling
-
-//      if error → 500
-//      else → 200
-
-// Remember how anonymous functions work
-// (err, rows) => {...} 
-// is equivalent to
-// function (err, rows) {...}
-
-
-// name functions related to HTTPS verbs
 const express = require('express');
 const cardServices = require('../services/cardServices');
 
@@ -61,9 +50,17 @@ function getCard(req, res) {
 
 function updateCard(req, res) {
     const { name, deck_order } = req.body;
-    cardServices.updateCard(req.params.id, name, deck_order, (err) => {
+    cardServices.updateCard(req.params.id, name, deck_order, (err, data) => {
         if (err) {
-            res.status(500).send(err.message);
+            if (err.code === 'SQLITE_CONSTRAINT') {
+                res.status(409).send(err.message); // duplicate / unique constraint
+            }
+            else {
+                res.status(500).send(err.message);
+            }
+        }
+        else if (data.changes === 0) {
+            res.status(404).send('Card does not exist in DB');
         }
         else {
             res.status(200).send(`Card with ID : ${req.params.id} is updated`)
@@ -72,11 +69,11 @@ function updateCard(req, res) {
 };
 
 function deleteCard(req, res) {
-    cardServices.deleteCard(req.params.id, (err, rows) => {
+    cardServices.deleteCard(req.params.id, (err, data) => {
         if (err) {
             res.status(500).send(err.message);
         }
-        else if (!rows) {
+        else if (data.changes === 0) {
             res.status(404).send('Card does not exist in DB');
         }
         else {
@@ -84,7 +81,6 @@ function deleteCard(req, res) {
         }
     })
 };
-
 
 module.exports = {
     getAllCards,
