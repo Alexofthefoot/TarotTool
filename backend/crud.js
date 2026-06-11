@@ -15,10 +15,6 @@ const readCard = (id, callback) => {
     db.get(sql, [id], callback)
 }
 
-const readAllCards = (callback) => {
-    const sql = `SELECT * FROM cards`
-    db.all(sql, [], callback)
-}
 
 const updateCard = (id, name, deck_order, callback) => {
     const sql = `UPDATE cards SET name = ?, deck_order = ? WHERE id = ?`
@@ -30,16 +26,10 @@ const deleteCard = (id, callback) => {
     db.run(sql, [id], callback)
 }
 
-//ROUTES FOR READINGS
-
-
-
-//ROUTES FOR READING_CARDS
 
 module.exports = { 
     createCard,
     readCard,
-    readAllCards,
     updateCard,
     deleteCard
 }   
