@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarot Tool</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarot</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Tarot Card Reader</h1>
-    <h3>Is this your card?</h3>
-    <p id="somecard"></p>
+
+    <header>
+        <h1>🔮 Your Tarot Journal 🕯</h1>
+        <p>Track your readings, unlock your intuition</p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <button onclick="enterApp()">Start Now</button>
+        </section>
+
+        <section id="login-container">
+            <!-- login box will appear here -->
+        </section>
+    </main>
+
+    <script>
+        //for now just redirects to homepage. Later add in log-in auth
+        function enterApp() {
+            window.location.href = "home.html";
+        }
+    </script>
+
 </body>
+
 </html>
