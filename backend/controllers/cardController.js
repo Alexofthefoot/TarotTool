@@ -7,6 +7,7 @@
 const express = require('express');
 const cardServices = require('../services/cardServices');
 
+// ...cards/
 function getAllCards(req, res) {
     cardServices.getAllCards((err, rows) => {
         if (err) {
@@ -34,6 +35,20 @@ function createCard(req, res) {
     })
 };
 
+// ...cards/random
+function randomCard(req, res) {
+    cardServices.randomCard((err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        }
+        else {
+            res.status(200).json(rows);
+        }
+    })
+
+};
+
+// ...cards/:id
 function getCard(req, res) {
     cardServices.getCard(req.params.id, (err, rows) => {
         if (err) {
@@ -85,6 +100,7 @@ function deleteCard(req, res) {
 module.exports = {
     getAllCards,
     createCard,
+    randomCard,
     getCard,
     updateCard,
     deleteCard

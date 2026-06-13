@@ -9,10 +9,12 @@ cardRouter.route('/')
 .get(cardController.getAllCards)
 .post(cardController.createCard);
 
+cardRouter.route('/random')
+.get(cardController.randomCard);
+
 cardRouter.route('/:id')
 .get(cardController.getCard)
 .put(cardController.updateCard)
 .delete(cardController.deleteCard);
-
 
 module.exports = cardRouter;
