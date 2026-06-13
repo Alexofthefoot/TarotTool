@@ -36,8 +36,8 @@ function createCard(req, res) {
 };
 
 // ...cards/random
-function randomCard(req, res) {
-    cardServices.randomCard((err, rows) => {
+function getRandomCard(req, res) {
+    cardServices.getRandomCard((err, rows) => {
         if (err) {
             res.status(500).send(err.message);
         }
@@ -78,7 +78,7 @@ function updateCard(req, res) {
             res.status(404).send('Card does not exist in DB');
         }
         else {
-            res.status(200).send(`Card with ID : ${req.params.id} is updated`)
+            res.status(200).send(`Card with ID : ${req.params.id} is updated`);
         }
     });
 };
@@ -92,7 +92,7 @@ function deleteCard(req, res) {
             res.status(404).send('Card does not exist in DB');
         }
         else {
-            res.status(200).send(`Card with ID : ${req.params.id} is deleted`)
+            res.status(200).send(`Card with ID : ${req.params.id} is deleted`);
         }
     })
 };
@@ -100,8 +100,8 @@ function deleteCard(req, res) {
 module.exports = {
     getAllCards,
     createCard,
-    randomCard,
+    getRandomCard,
     getCard,
     updateCard,
     deleteCard
-}
+};

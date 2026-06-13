@@ -10,7 +10,7 @@ cardRouter.route('/')
 .post(cardController.createCard);
 
 cardRouter.route('/random')
-.get(cardController.randomCard);
+.get(cardController.getRandomCard);
 
 cardRouter.route('/:id')
 .get(cardController.getCard)

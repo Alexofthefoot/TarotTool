@@ -21,6 +21,11 @@ const createCard = (name, deck_order, callback) => {
     });
 };
 
+const getRandomCard = (callback) => {
+    const sql = `SELECT * FROM cards ORDER BY RANDOM() LIMIT 1`;
+    db.all(sql, [], callback);
+}
+
 const getCard = (id, callback) => {
     const sql = `SELECT * FROM cards WHERE id = ?`;
     db.get(sql, [id], callback);
@@ -43,7 +48,8 @@ const deleteCard = (id, callback) => {
 module.exports = {
     getAllCards,
     createCard,
+    getRandomCard,
     getCard,
     updateCard,
     deleteCard
-}
+};
