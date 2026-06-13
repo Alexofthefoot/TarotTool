@@ -85,3 +85,28 @@ button:hover {
     background: #5b2a8a;
     box-shadow: 0 0 12px rgba(125, 95, 255, 0.5);
 }
+
+
+/* Card Display */
+.card-display {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+
+    background: rgba(10, 5, 20, 0.5);
+    border: 1px solid rgba(125, 95, 255, 0.2);
+    border-radius: 12px;
+
+    backdrop-filter: blur(8px);
+}
+
+.card-display h2 {
+    color: #c9a7ff;
+    margin-top: 0;
+}
+
+.card-display p {
+    color: #e7e1ff;
+    opacity: 0.8;
+}

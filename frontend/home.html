@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tarot</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -22,7 +22,19 @@
     </nav>
 
     <main>
-        <!-- page content will go here -->
+        <header>
+        <h1>Daily Tarot Draw</h1>
+        <p>Draw a card and reflect on its meaning for today.</p>
+    </header>
+
+    <div class="controls">
+        <button id="draw-card-btn" onclick="randomDraw()">Draw Card of the Day</button>
+    </div>
+
+    <section class="card-display">
+        <h2>Your Card Appears Here</h2>
+        <p>Click the button above to reveal a card.</p>
+    </section>
     </main>
 </body>
 </html>
