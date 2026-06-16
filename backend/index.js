@@ -19,15 +19,24 @@
 
 
 const express = require('express');
+const cors = require('cors');
 const cardRouter  = require('./routes/cardRouter.js');
 
 // CREATE THE EXPRESS APP
 const app = express();
 
+// WHITELIST REQUESTS COMING FROM LIVE SERVER (http://127.0.0.1:5500)
+const corsOptions = {
+  origin: 'http://127.0.0.1:5500',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+
 // USING MIDDLEWARE
 app.use(express.json());
 
-// MOUTING EACH ROUTE
+// MOUNTING EACH ROUTE
 app.use('/api/v1/cards', cardRouter);
 
 app.listen(3000, () => {
