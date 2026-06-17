@@ -9,12 +9,19 @@ cardRouter.route('/')
 .get(cardController.getAllCards)
 .post(cardController.createCard);
 
+<<<<<<< HEAD
 cardRouter.route('/random')
 .get(cardController.getRandomCard);
 
+=======
+>>>>>>> refactor/routes-and-controllers
 cardRouter.route('/:id')
 .get(cardController.getCard)
 .put(cardController.updateCard)
 .delete(cardController.deleteCard);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refactor/routes-and-controllers
 module.exports = cardRouter;
