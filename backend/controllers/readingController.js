@@ -32,7 +32,7 @@ function getReading(req, res) {
             res.status(500).send(err.message);
         }
         else if (!rows) {
-            res.status(404).send('Reading does not exist in DB');
+            res.status(404).send('Reading does not exist in DB.');
         }
         else {
             res.status(200).json(rows);
@@ -47,7 +47,7 @@ function updateReading(req, res) {
             res.status(500).send(err.message);
         }
         else if (data.changes === 0) {
-            res.status(404).send('Reading does not exist in DB');
+            res.status(404).send('Reading does not exist in DB.');
         }
         else {
             res.status(200).send(`Reading with ID : ${req.params.id} is updated.`);

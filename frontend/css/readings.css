@@ -1,0 +1,49 @@
+/* Readings List */
+
+.reading-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.reading-card {
+    background: rgba(10, 5, 20, 0.5);
+
+    border: 1px solid rgba(125, 95, 255, 0.2);
+    border-radius: 12px;
+
+    padding: 25px;
+
+    backdrop-filter: blur(8px);
+
+    transition: 0.2s;
+}
+
+
+.reading-card:hover {
+    border-color: rgba(125, 95, 255, 0.6);
+    box-shadow: 0 0 15px rgba(125, 95, 255, 0.25);
+}
+
+
+.reading-card h2 {
+    color: #c9a7ff;
+    margin-top: 0;
+}
+
+
+.reading-card .question {
+    color: #9adbb3;
+    font-style: italic;
+}
+
+
+.reading-card .notes {
+    color: #e7e1ff;
+    opacity: 0.8;
+}

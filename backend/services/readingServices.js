@@ -35,7 +35,7 @@ const updateReading = (id, title, question, notes, callback) => {
 const deleteReading = (id, callback) => {
     const sql = `DELETE FROM readings WHERE id = ?`;
     db.run(sql, [id], function (err) {
-        callback(err, {changes: this.changes });
+        callback(err, { changes: this.changes });
     });
 };
 
