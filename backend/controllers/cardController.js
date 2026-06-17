@@ -7,10 +7,7 @@
 const express = require('express');
 const cardServices = require('../services/cardServices');
 
-<<<<<<< HEAD
 // ...cards/
-=======
->>>>>>> refactor/routes-and-controllers
 function getAllCards(req, res) {
     cardServices.getAllCards((err, rows) => {
         if (err) {
@@ -38,7 +35,6 @@ function createCard(req, res) {
     })
 };
 
-<<<<<<< HEAD
 // ...cards/random
 function getRandomCard(req, res) {
     cardServices.getRandomCard((err, rows) => {
@@ -53,8 +49,6 @@ function getRandomCard(req, res) {
 };
 
 // ...cards/:id
-=======
->>>>>>> refactor/routes-and-controllers
 function getCard(req, res) {
     cardServices.getCard(req.params.id, (err, rows) => {
         if (err) {
@@ -84,11 +78,7 @@ function updateCard(req, res) {
             res.status(404).send('Card does not exist in DB');
         }
         else {
-<<<<<<< HEAD
             res.status(200).send(`Card with ID : ${req.params.id} is updated`);
-=======
-            res.status(200).send(`Card with ID : ${req.params.id} is updated`)
->>>>>>> refactor/routes-and-controllers
         }
     });
 };
@@ -102,11 +92,7 @@ function deleteCard(req, res) {
             res.status(404).send('Card does not exist in DB');
         }
         else {
-<<<<<<< HEAD
             res.status(200).send(`Card with ID : ${req.params.id} is deleted`);
-=======
-            res.status(200).send(`Card with ID : ${req.params.id} is deleted`)
->>>>>>> refactor/routes-and-controllers
         }
     })
 };
@@ -114,15 +100,8 @@ function deleteCard(req, res) {
 module.exports = {
     getAllCards,
     createCard,
-<<<<<<< HEAD
     getRandomCard,
     getCard,
     updateCard,
     deleteCard
 };
-=======
-    getCard,
-    updateCard,
-    deleteCard
-}
->>>>>>> refactor/routes-and-controllers
