@@ -14,9 +14,9 @@ const getAllCards = (callback) => {
     db.all(sql, [], callback);
 }
 
-const createCard = (name, deck_order, callback) => {
-    const sql = `INSERT INTO cards (name, deck_order) VALUES (?, ?)`;
-    db.run(sql, [name, deck_order], function (err) {
+const createCard = (name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location, callback) => {
+    const sql = `INSERT INTO cards (name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    db.run(sql, [name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location], function (err) {
         callback(err, { id: this.lastID });
     });
 };
@@ -31,9 +31,9 @@ const getCard = (id, callback) => {
     db.get(sql, [id], callback);
 }
 
-const updateCard = (id, name, deck_order, callback) => {
+const updateCard = (id, name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location, callback) => {
     const sql = `UPDATE cards SET name = ?, deck_order = ? WHERE id = ?`;
-    db.run(sql, [name, deck_order, id], function (err) {
+    db.run(sql, [id, name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location], function (err) {
         callback(err, { changes: this.changes });
     });
 }

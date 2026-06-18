@@ -19,8 +19,8 @@ function getAllCards(req, res) {
 };
 
 function createCard(req, res) {
-    const { name, deck_order } = req.body;
-    cardServices.createCard(name, deck_order, (err, data) => {
+    const { name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location } = req.body;
+    cardServices.createCard(name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location, (err, data) => {
         if (err) {
             if (err.code === 'SQLITE_CONSTRAINT') {
                 res.status(409).send(err.message); // duplicate / unique constraint
@@ -62,8 +62,8 @@ function getCard(req, res) {
 };
 
 function updateCard(req, res) {
-    const { name, deck_order } = req.body;
-    cardServices.updateCard(req.params.id, name, deck_order, (err, data) => {
+    const { name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location } = req.body;
+    cardServices.updateCard(req.params.id, name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location, (err, data) => {
         if (err) {
             if (err.code === 'SQLITE_CONSTRAINT') {
                 res.status(409).send(err.message); // duplicate / unique constraint
