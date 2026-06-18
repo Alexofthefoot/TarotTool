@@ -23,7 +23,7 @@ const createCard = (name, deck_order, callback) => {
 
 const getRandomCard = (callback) => {
     const sql = `SELECT * FROM cards ORDER BY RANDOM() LIMIT 1`;
-    db.all(sql, [], callback);
+    db.get(sql, [], callback);
 }
 
 const getCard = (id, callback) => {

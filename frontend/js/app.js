@@ -8,7 +8,7 @@ async function randomDraw() {
             throw new Error(`Response status: ${response.status}`);
         }
         const result = await response.json();
-        cardInfo.innerHTML = result[0].name; 
+        cardInfo.innerHTML = result.name; 
     } catch (error) {
         console.error(error.message);
     }

@@ -4,7 +4,6 @@
 //      deciding HTTP status codes
 //      sending JSON response
 //      error handling
-const express = require('express');
 const cardServices = require('../services/cardServices');
 
 // ...cards/
@@ -16,13 +15,12 @@ function getAllCards(req, res) {
         else {
             res.status(200).json(rows);
         }
-    })
-    //no meaningful return needed, as its already send the relevant res
+    });
 };
 
 function createCard(req, res) {
     const { name, deck_order } = req.body;
-    cardServices.createCard(name, deck_order, (err, rows) => {
+    cardServices.createCard(name, deck_order, (err, data) => {
         if (err) {
             if (err.code === 'SQLITE_CONSTRAINT') {
                 res.status(409).send(err.message); // duplicate / unique constraint
@@ -30,7 +28,7 @@ function createCard(req, res) {
                 res.status(500).send(err.message); // everything else
             }
         } else {
-            res.status(201).send(`Card is added ID: ${rows.id}`);
+            res.status(201).send(`Card is added ID: ${data.id}`);
         }
     })
 };

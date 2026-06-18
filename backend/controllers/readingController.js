@@ -1,4 +1,3 @@
-const express = require('express');
 const readingServices = require('../services/readingServices');
 
 // ...readings/
@@ -15,12 +14,12 @@ function getAllReadings(req, res) {
 
 function createReading(req, res) {
     const { title, question, notes } = req.body;
-    readingServices.createReading(title, question, notes, (err, rows) => {
+    readingServices.createReading(title, question, notes, (err, data) => {
         if (err) {
             res.status(500).send(err.message);
         }
         else {
-            res.status(200).json(rows);
+            res.status(200).json(data);
         }
     })
 };
