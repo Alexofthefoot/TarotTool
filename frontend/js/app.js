@@ -1,4 +1,4 @@
-
+//the controller function that calls the helper functions for each of its responsibilities
 async function randomDraw() {
     const cardSection = document.getElementsByClassName("card-display");
     const cardInfo = document.getElementById('card-of-the-day-reveal');

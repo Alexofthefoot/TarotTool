@@ -47,3 +47,21 @@
     color: #e7e1ff;
     opacity: 0.8;
 }
+
+
+.reading-images {
+    display: none;
+    justify-content: center;
+    gap: 4px;
+}
+
+.reading-images img {
+    width: 60px;
+    max-width: 60px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.reading-card:hover .reading-images {
+    display:flex;
+}
