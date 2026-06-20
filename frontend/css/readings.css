@@ -48,20 +48,38 @@
     opacity: 0.8;
 }
 
+.reading-images-wrapper {
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(-8px);
+
+    transition:
+        max-height 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
 
 .reading-images {
-    display: none;
+    display: flex;
     justify-content: center;
     gap: 4px;
 }
 
 .reading-images img {
     width: 60px;
-    max-width: 60px;
+    /* max-width: 60px; */
     height: auto;
     flex-shrink: 0;
 }
 
 .reading-card:hover .reading-images {
     display:flex;
+}
+
+.reading-card:hover .reading-images-wrapper {
+    max-height: 120px; /* adjust for more cards */
+    opacity: 1;
+    transform: translateY(0);
 }
