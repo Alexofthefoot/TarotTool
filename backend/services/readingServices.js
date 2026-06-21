@@ -3,9 +3,9 @@ const db = require('../database')
 // db.get() for retreiving exactly 1 row,
 // db. all() for retreiving array of rows
 
-const getAllReadings = (callback) => {
-    const sql = `SELECT * FROM readings`;
-    db.all(sql, [], callback);
+const getAllReadings = (limit, offset, callback) => {
+    const sql = `SELECT * FROM readings ORDER BY created_at ASC LIMIT ? OFFSET ?`;
+    db.all(sql, [limit, offset], callback);
 };
 
 const createReading = (title, question, notes, callback) => {

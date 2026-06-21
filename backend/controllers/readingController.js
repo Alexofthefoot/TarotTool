@@ -2,7 +2,10 @@ const readingServices = require('../services/readingServices');
 
 // ...readings/
 function getAllReadings(req, res) {
-    readingServices.getAllReadings((err, rows) => {
+    // check for limit/ offset
+    const limit = parseInt(req.query.limit, 10) || 20;   // The 10 is a radix, default to 20
+    const offset = parseInt(req.query.offset, 10) || 0;  // Default to start at index 0
+    readingServices.getAllReadings(limit, offset, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
         }
