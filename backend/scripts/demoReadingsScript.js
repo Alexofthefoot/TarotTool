@@ -63,3 +63,37 @@ demoData.forEach(reading => {
         [reading.title, reading.question, reading.notes]
     );
 });
+
+// Reading_cards seed data (order does not match the above sample readings!)
+const readingCardsSeed = [
+  // 1. Financial Clarity (3 cards)
+  { reading_id: 1, card_id: 9, position_number: 1, position_name: "Past", is_reversed: false },
+  { reading_id: 1, card_id: 14, position_number: 2, position_name: "Present", is_reversed: true },
+  { reading_id: 1, card_id: 32, position_number: 3, position_name: "Advice", is_reversed: false },
+
+  // 2. Decision Making (3 cards)
+  { reading_id: 2, card_id: 0, position_number: 1, position_name: "Option A Energy", is_reversed: false },
+  { reading_id: 2, card_id: 21, position_number: 2, position_name: "Current State", is_reversed: false },
+  { reading_id: 2, card_id: 52, position_number: 3, position_name: "Outcome", is_reversed: true },
+
+  // 3. Monthly Outlook (2 cards)
+  { reading_id: 3, card_id: 6, position_number: 1, position_name: "Theme", is_reversed: false },
+  { reading_id: 3, card_id: 18, position_number: 2, position_name: "Challenge", is_reversed: false },
+
+  // 4. Personal Growth (3 cards)
+  { reading_id: 4, card_id: 11, position_number: 1, position_name: "Strengths", is_reversed: false },
+  { reading_id: 4, card_id: 44, position_number: 2, position_name: "Blockage", is_reversed: true },
+  { reading_id: 4, card_id: 67, position_number: 3, position_name: "Growth Path", is_reversed: false },
+
+  // 5. Relationship Insight (3 cards)
+  { reading_id: 5, card_id: 2, position_number: 1, position_name: "You", is_reversed: false },
+  { reading_id: 5, card_id: 41, position_number: 2, position_name: "Partner", is_reversed: false },
+  { reading_id: 5, card_id: 48, position_number: 3, position_name: "Advice", is_reversed: true },
+];
+
+readingCardsSeed.forEach(readingCard => {
+    db.run(
+        `INSERT INTO reading_cards (reading_id, card_id, position_number, positon_name) VALUES (?, ?, ?, ?)`,
+        [reading_cards.reading_id, reading_cards.card_id, reading_cards.position_number, reading_cards.positon_name]
+    );
+});

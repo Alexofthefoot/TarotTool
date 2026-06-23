@@ -22,6 +22,7 @@ const express = require('express');
 const cors = require('cors');
 const cardRouter  = require('./routes/cardRouter.js');
 const readingRouter = require('./routes/readingRouter.js')
+const reading_cardRouter = require('./routes/reading_cardRouter.js');
 
 // CREATE THE EXPRESS APP
 const app = express();
@@ -40,6 +41,7 @@ app.use(express.json());
 // MOUNTING EACH ROUTE
 app.use('/api/v1/cards', cardRouter);
 app.use('/api/v1/readings', readingRouter);
+app.use('/api/v1/reading_cards', reading_cardRouter);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000')

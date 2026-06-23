@@ -1,4 +1,4 @@
-const db = require('../database')
+const db = require('../database');
 // db.run() for state changes, returns metadata
 // db.get() for retreiving exactly 1 row,
 // db. all() for retreiving array of rows
@@ -39,10 +39,19 @@ const deleteReading = (id, callback) => {
     });
 };
 
+const getCardsPerReading = (id, callback) => {
+    const sql = `SELECT cards.id, cards.name 
+    FROM cards 
+    INNER JOIN reading_cards ON cards.id = reading_cards.card_id 
+    WHERE reading_cards.reading_id = ?`;
+    db.all(sql, [id], callback);
+}
+
 module.exports = {
     getAllReadings,
     createReading,
     getReading,
     updateReading,
-    deleteReading
+    deleteReading, 
+    getCardsPerReading
 }

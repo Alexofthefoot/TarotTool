@@ -71,10 +71,26 @@ readingServices.deleteReading(req.params.id, (err, data) => {
     })
 };
 
+// ...readings/:id/cards
+function getCardsPerReading(req, res) {
+    readingServices.getCardsPerReading(req.params.id, (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        }
+        else if (!rows) {
+            res.status(404).send('Reading ' + req.params.id + ' does not exist in DB.');
+        }
+        else {
+            res.status(200).json(rows);
+        }
+    })
+}
+
 module.exports = {
     getAllReadings,
     createReading,
     getReading,
     updateReading,
-    deleteReading
+    deleteReading, 
+    getCardsPerReading
 }
