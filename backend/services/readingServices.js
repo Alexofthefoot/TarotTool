@@ -40,7 +40,7 @@ const deleteReading = (id, callback) => {
 };
 
 const getCardsPerReading = (id, callback) => {
-    const sql = `SELECT cards.deck_order, cards.name 
+    const sql = `SELECT cards.deck_order, cards.name, cards.image_location 
     FROM cards 
     INNER JOIN reading_cards ON cards.id = reading_cards.card_id 
     WHERE reading_cards.reading_id = ?`;

@@ -1,28 +1,38 @@
-// Remove the placeholder data, so long as user data exists
-function removePlaceholder() {
-    // TODO
-    // if at least 1 user-created reading exists remove all
-    if (true) {
-        //target reading container
+let offset = 0;
+let limit = 1; //changes to 10 once user data is confirmed to exist
+
+//Decides if the placeholder or user data should be used
+async function windowInit() {
+    const readings = await fetchReadings();
+    offset = 0; // reset the offset, as the reading wasnt displayed to the user
+    limit = 10;
+    if (readings != null) {
+        // remove placeholder data
         let wrapper = document.getElementsByClassName("card-wrapper")[0];
-        //empty it
         wrapper.innerHTML = "";
+        showMore();
     }
 }
 
 // Display the user's readings data in the correct html format
 async function showMore() {
-    const readings = await fetchReadings(); //this is an asyc function
+    const readings = await fetchReadings();
+    if (readings == null) {
+        return;
+    }
+
+    // adjust the page elements
     const wrapper = document.getElementsByClassName("card-wrapper")[0];
     for (let i = 0; i < readings.length; i++) {
-        console.log('in loop');
-        //create div container
+        const readingCards = await fetchCards(readings[i].id);
         const newDiv = document.createElement("div");
         newDiv.className = "reading-card";
-         //create h2 title
+
+        //create h2 title
         const title = document.createElement("h2");
         title.innerHTML = readings[i].title;
         newDiv.appendChild(title);
+
         //create 2 p's
         const p1 = document.createElement("p");
         p1.className = "question";
@@ -32,39 +42,55 @@ async function showMore() {
         p2.innerHTML = readings[i].notes;
         newDiv.appendChild(p1);
         newDiv.appendChild(p2);
-        //create div wrapper and images(for now empty)
+
+        //create div wrapper and images
         const subDiv = document.createElement("div");
         subDiv.className = "reading-images-wrapper";
-            //create div container
-            const subsubDiv = document.createElement("div")
-            subsubDiv.className = "reading-images";
-            // TODO: 
-            // images will be fixed once reading_cards is connected
+        const subsubDiv = document.createElement("div")
+        subsubDiv.className = "reading-images";
+        
+        // fetch the readingCards per reading 
+        for (let j = 0; j < readingCards.length; j++){
             const img = document.createElement("img");
-            img.src = "/frontend/assets/Cards-png/CardBacks.png";
+            img.src = "/frontend/assets/Cards-png/" + readingCards[j].image_location;
             subsubDiv.appendChild(img);
-            subDiv.appendChild(subsubDiv);
+        }
+        subDiv.appendChild(subsubDiv);
         newDiv.appendChild(subDiv);
         // Append all the new elements
         wrapper.appendChild(newDiv);
     }
 }
 
-// fetch the data for the next set of readings
-// TODO:
-// keep track of offset 
+// fetch the data for the next set of readings & update the offset
 async function fetchReadings() {
-    let url = 'http://localhost:3000/api/v1/readings';
-    // Hard-coded for now, later make this adjustable by the user?
-    let offset = 0;
-    let limit = 10;
+    let url = 'http://localhost:3000/api/v1/readings' + '?limit=' + limit + '&offset=' + offset;
     // fetch data from db
     try {
-        const response = await fetch(url + '?limit=' + limit + '&offset=' + offset);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        const result = await response.json(); 
+        const result = await response.json();
+        offset += result.length;
+        return result;
+    } catch (error) {
+        console.error(error.message);
+    }
+    return null;
+}
+
+// fetch the cards associated with the current reading
+// TODO: 
+// fetch all 10 readings' worth at once
+async function fetchCards(id) {
+    let url = 'http://localhost:3000/api/v1/readings/' + id + '/cards';
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const result = await response.json();
         return result;
     } catch (error) {
         console.error(error.message);
@@ -73,5 +99,5 @@ async function fetchReadings() {
 }
 
 window.onload = function () {
-    removePlaceholder();
+    windowInit();
 };
