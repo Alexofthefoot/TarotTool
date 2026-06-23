@@ -11,7 +11,8 @@ let db = new sqlite3.Database(dbname, (err) => {
     db.serialize(() => {
         db.run(`PRAGMA foreign_keys = ON;`)
 
-        db.run(`CREATE TABLE IF NOT EXISTS cards (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        db.run(`CREATE TABLE IF NOT EXISTS cards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 name TEXT NOT NULL UNIQUE, 
                 arcana TEXT CHECK (arcana IN ('Major', 'Minor')),
                 suit TEXT,

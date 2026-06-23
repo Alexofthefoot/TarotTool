@@ -32,34 +32,43 @@ const demoData = [
     { title: 'Romantic Potential', question: 'What potential exists in my romantic life?', notes: 'The reading suggested meaningful new connections.' },
     { title: 'Stress Management', question: 'How can I reduce stress?', notes: 'Cards pointed toward simplicity and self-care.' },
     { title: 'Long-Term Vision', question: 'What should I focus on for the future?', notes: 'The spread emphasized patience and strategic thinking.' },
-    { title: 'Career Confidence', question: 'How can I feel more confident at work?', notes: 'Cards highlighted preparation and trusting your abilities.' },
-
-    { title: 'Daily Guidance', question: 'What should I focus on today?', notes: 'The reading encouraged mindfulness and positivity.' },
-    { title: 'Opportunity Ahead', question: 'What opportunity should I pay attention to?', notes: 'Cards suggested remaining open to unexpected possibilities.' },
-    { title: 'Relationship Growth', question: 'How can my relationship evolve positively?', notes: 'The spread highlighted trust and shared goals.' },
-    { title: 'Financial Planning', question: 'What should guide my financial decisions?', notes: 'Cards emphasized discipline and long-term thinking.' },
-    { title: 'Life Purpose', question: 'What should I know about my purpose?', notes: 'The reading suggested aligning actions with personal values.' },
-    { title: 'Motivation Reading', question: 'How can I stay motivated?', notes: 'Cards pointed toward celebrating small wins.' },
-    { title: 'New Project', question: 'What energy surrounds my new project?', notes: 'The spread suggested momentum and creativity.' },
-    { title: 'Conflict Resolution', question: 'How can I resolve a current conflict?', notes: 'Cards emphasized patience and understanding.' },
-    { title: 'Personal Reflection', question: 'What lesson should I reflect on?', notes: 'The reading highlighted growth through experience.' },
-    { title: 'Positive Change', question: 'What positive change is coming?', notes: 'Cards suggested gradual but meaningful progress.' },
-
-    { title: 'Abundance Reading', question: 'How can I attract abundance?', notes: 'The spread emphasized gratitude and consistency.' },
-    { title: 'Work-Life Balance', question: 'How can I improve work-life balance?', notes: 'Cards highlighted prioritizing personal well-being.' },
-    { title: 'Relationship Decision', question: 'What should guide my relationship decisions?', notes: 'The reading encouraged honesty and self-respect.' },
-    { title: 'Career Opportunity', question: 'What should I know about upcoming career opportunities?', notes: 'Cards pointed toward preparation and confidence.' },
-    { title: 'Self-Discovery', question: 'What can I learn about myself right now?', notes: 'The spread encouraged curiosity and self-acceptance.' },
-    { title: 'Fresh Start', question: 'How can I make the most of a fresh start?', notes: 'Cards emphasized courage and optimism.' },
-    { title: 'Future Relationship', question: 'What should I know about future relationships?', notes: 'The reading suggested openness and authenticity.' },
-    { title: 'Financial Growth', question: 'How can I encourage financial growth?', notes: 'Cards highlighted patience and responsible planning.' },
-    { title: 'Personal Strength', question: 'What is my greatest strength right now?', notes: 'The spread pointed toward resilience and determination.' },
-    { title: 'Year Ahead', question: 'What theme will define the year ahead?', notes: 'Cards suggested transformation, learning, and steady progress.' }
+    { title: 'Career Confidence', question: 'How can I feel more confident at work?', notes: 'Cards highlighted preparation and trusting your abilities.' }
 ];
 
-demoData.forEach(reading => {
-    db.run(
-        `INSERT INTO readings (title, question, notes) VALUES (?, ?, ?)`,
-        [reading.title, reading.question, reading.notes]
-    );
+// Reading_cards seed data (order does not match the above sample readings!)
+const readingCards = [
+    // 1. Financial Clarity (3 cards)
+    { reading_id: 1, card_id: 10, position_number: 1, position_name: "Past", is_reversed: false },
+    { reading_id: 1, card_id: 15, position_number: 2, position_name: "Present", is_reversed: true },
+    { reading_id: 1, card_id: 33, position_number: 3, position_name: "Advice", is_reversed: false },
+
+    // 2. Decision Making (3 cards)
+    { reading_id: 2, card_id: 1, position_number: 1, position_name: "Option A Energy", is_reversed: false },
+    { reading_id: 2, card_id: 21, position_number: 2, position_name: "Current State", is_reversed: false },
+    { reading_id: 2, card_id: 52, position_number: 3, position_name: "Outcome", is_reversed: true },
+
+    // 3. Monthly Outlook (2 cards)
+    { reading_id: 3, card_id: 6, position_number: 1, position_name: "Theme", is_reversed: false },
+    { reading_id: 3, card_id: 18, position_number: 2, position_name: "Challenge", is_reversed: false },
+
+    // 4. Personal Growth (3 cards)
+    { reading_id: 4, card_id: 11, position_number: 1, position_name: "Strengths", is_reversed: false },
+    { reading_id: 4, card_id: 44, position_number: 2, position_name: "Blockage", is_reversed: true },
+    { reading_id: 4, card_id: 67, position_number: 3, position_name: "Growth Path", is_reversed: false },
+
+    // 5. Relationship Insight (3 cards)
+    { reading_id: 5, card_id: 2, position_number: 1, position_name: "You", is_reversed: false },
+    { reading_id: 5, card_id: 41, position_number: 2, position_name: "Partner", is_reversed: false },
+    { reading_id: 5, card_id: 48, position_number: 3, position_name: "Advice", is_reversed: true },
+];
+
+db.serialize(() => {
+    for (const reading of demoData) {
+        const sql = `INSERT INTO readings (title, question, notes) VALUES (?, ?, ?)`;
+        db.run(sql, [reading.title, reading.question, reading.notes]);
+    }
+    for (const readingCard of readingCards){
+        const sql = `INSERT INTO reading_cards (reading_id, card_id, position_number, position_name) VALUES (?, ?, ?, ?)`;
+        db.run(sql, [readingCard.reading_id, readingCard.card_id, readingCard.position_number, readingCard.position_name]);
+    }
 });

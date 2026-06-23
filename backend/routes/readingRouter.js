@@ -11,4 +11,7 @@ readingRouter.route('/:id')
 .put(readingController.updateReading)
 .delete(readingController.deleteReading);
 
+readingRouter.route('/:id/cards')
+.get(readingController.getCardsPerReading)
+
 module.exports = readingRouter;
