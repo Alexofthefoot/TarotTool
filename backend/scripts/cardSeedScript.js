@@ -1,7 +1,7 @@
 const db = require('../database');
-const path = '../assets/Card';
 
-const majorArcana = [
+const tarotDeck = [
+    // Major Arcana
     { name: 'The Fool', arcana: 'Major', deck_order: 0, image_location: '00-TheFool.png' },
     { name: 'The Magician', arcana: 'Major', deck_order: 1, image_location: '01-TheMagician.png' },
     { name: 'The High Priestess', arcana: 'Major', deck_order: 2, image_location: '02-TheHighPriestess.png' },
@@ -23,10 +23,8 @@ const majorArcana = [
     { name: 'The Moon', arcana: 'Major', deck_order: 18, image_location: '18-TheMoon.png' },
     { name: 'The Sun', arcana: 'Major', deck_order: 19, image_location: '19-TheSun.png' },
     { name: 'Judgement', arcana: 'Major', deck_order: 20, image_location: '20-Judgement.png' },
-    { name: 'The World', arcana: 'Major', deck_order: 21, image_location: '21-TheWorld.png' }
-];
+    { name: 'The World', arcana: 'Major', deck_order: 21, image_location: '21-TheWorld.png' },
 
-const minorArcana = [
     // Wands
     { name: 'Ace of Wands', arcana: 'Minor', suit: 'Wands', rank: 'Ace', rank_number: 1, deck_order: 22, image_location: 'Wands01.png' },
     { name: 'Two of Wands', arcana: 'Minor', suit: 'Wands', rank: 'Two', rank_number: 2, deck_order: 23, image_location: 'Wands02.png' },
@@ -92,16 +90,10 @@ const minorArcana = [
     { name: 'King of Pentacles', arcana: 'Minor', suit: 'Pentacles', rank: 'King', rank_number: 14, deck_order: 77, image_location: 'Pentacles14.png' }
 ];
 
-majorArcana.forEach(card => {
-    db.run(
-        `INSERT INTO cards (name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [card.name, card.arcana, card.suit, card.rank, card.rank_number, card.deck_order, card.meaning_upright, card.meaning_reversed, card.image_location]
-    );
+db.serialize(() => {
+    for (const card of tarotDeck) {
+        const sql = `INSERT INTO cards (name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.run(sql, [card.name, card.arcana, card.suit, card.rank, card.rank_number, card.deck_order, card.meaning_upright, card.meaning_reversed, card.image_location]
+        );
+    }
 });
-
-minorArcana.forEach(card => {
-    db.run(
-        `INSERT INTO cards (name, arcana, suit, rank, rank_number, deck_order, meaning_upright, meaning_reversed, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [card.name, card.arcana, card.suit, card.rank, card.rank_number, card.deck_order, card.meaning_upright, card.meaning_reversed, card.image_location]
-    );
-})
