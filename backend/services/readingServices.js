@@ -4,7 +4,7 @@ const db = require('../database');
 // db. all() for retreiving array of rows
 
 const getAllReadings = (limit, offset, callback) => {
-    const sql = `SELECT * FROM readings ORDER BY created_at ASC LIMIT ? OFFSET ?`;
+    const sql = `SELECT * FROM readings ORDER BY created_at DESC LIMIT ? OFFSET ?`;
     db.all(sql, [limit, offset], callback);
 };
 
@@ -40,9 +40,14 @@ const deleteReading = (id, callback) => {
 };
 
 const getCardsPerReading = (id, callback) => {
-    const sql = `SELECT cards.deck_order, cards.name, cards.image_location 
-    FROM cards 
-    INNER JOIN reading_cards ON cards.id = reading_cards.card_id 
+    const sql = `SELECT cards.deck_order,
+    cards.name, 
+    cards.image_location, 
+    reading_cards.position_number, 
+    strftime('%b %d, %Y', readings.created_at) AS created_at
+    FROM reading_cards 
+    INNER JOIN readings ON reading_cards.reading_id = readings.id
+    INNER JOIN cards ON reading_cards.card_id = cards.id
     WHERE reading_cards.reading_id = ?`;
     db.all(sql, [id], callback);
 }

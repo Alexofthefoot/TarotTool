@@ -1,41 +1,39 @@
 const db = require('../database');
 
 const demoData = [
-    { title: 'Financial Clarity', question: 'How can I improve my financial situation?', notes: 'Cards highlighted budgeting, patience, and avoiding impulsive spending.' },
-    { title: 'Career Guidance', question: 'What should I focus on to advance my career?', notes: 'The reading emphasized learning new skills and building relationships.' },
-    { title: 'Relationship Insight', question: 'How can I strengthen my relationship?', notes: 'Cards suggested open communication and mutual understanding.' },
-    { title: 'Love Reading', question: 'What should I know about my love life right now?', notes: 'The spread pointed to new opportunities for connection.' },
-    { title: 'Decision Making', question: 'Should I take the new opportunity?', notes: 'Cards advised balancing intuition with practical considerations.' },
-    { title: 'Monthly Outlook', question: 'What energy surrounds me this month?', notes: 'Themes of growth, patience, and reflection appeared.' },
-    { title: 'Personal Growth', question: 'How can I become a better version of myself?', notes: 'The reading encouraged self-confidence and consistency.' },
-    { title: 'Friendship Guidance', question: 'How can I improve a friendship?', notes: 'Cards emphasized honesty and quality time.' },
-    { title: 'Workplace Challenges', question: 'How should I handle current work stress?', notes: 'The spread suggested setting boundaries and staying focused.' },
-    { title: 'Family Matters', question: 'What should I focus on within my family?', notes: 'Cards highlighted compassion and understanding.' },
-
-    { title: 'Future Path', question: 'What direction is my life heading?', notes: 'The reading suggested gradual progress toward long-term goals.' },
-    { title: 'Creative Inspiration', question: 'How can I unlock more creativity?', notes: 'Cards encouraged experimentation and curiosity.' },
-    { title: 'Confidence Boost', question: 'How can I build my confidence?', notes: 'The spread pointed toward recognizing past successes.' },
-    { title: 'Spiritual Journey', question: 'What should I focus on spiritually?', notes: 'Cards suggested mindfulness and self-reflection.' },
-    { title: 'Life Balance', question: 'How can I create better balance?', notes: 'The reading highlighted the need for rest and prioritization.' },
-    { title: 'New Beginning', question: 'What should I know about this new chapter?', notes: 'Cards indicated optimism and fresh opportunities.' },
-    { title: 'Self-Care Reading', question: 'How can I take better care of myself?', notes: 'The spread encouraged healthy routines and boundaries.' },
-    { title: 'Goal Achievement', question: 'What will help me reach my goals?', notes: 'Cards emphasized persistence and planning.' },
-    { title: 'Communication Advice', question: 'How can I communicate more effectively?', notes: 'The reading suggested clarity and active listening.' },
-    { title: 'Inner Wisdom', question: 'What is my intuition trying to tell me?', notes: 'Cards encouraged trusting inner guidance.' },
-
-    { title: 'Career Change', question: 'Is it time for a career change?', notes: 'The spread suggested exploring possibilities while staying practical.' },
-    { title: 'Financial Opportunity', question: 'What opportunities are available financially?', notes: 'Cards pointed toward steady growth rather than quick rewards.' },
-    { title: 'Healing Reading', question: 'What do I need to heal from?', notes: 'The reading emphasized acceptance and patience.' },
-    { title: 'Travel Plans', question: 'What should I know about upcoming travel?', notes: 'Cards suggested flexibility and openness to surprises.' },
-    { title: 'Learning Journey', question: 'How can I learn more effectively?', notes: 'The spread highlighted consistency and curiosity.' },
-    { title: 'Leadership Reading', question: 'How can I become a better leader?', notes: 'Cards emphasized empathy and confidence.' },
-    { title: 'Romantic Potential', question: 'What potential exists in my romantic life?', notes: 'The reading suggested meaningful new connections.' },
-    { title: 'Stress Management', question: 'How can I reduce stress?', notes: 'Cards pointed toward simplicity and self-care.' },
-    { title: 'Long-Term Vision', question: 'What should I focus on for the future?', notes: 'The spread emphasized patience and strategic thinking.' },
-    { title: 'Career Confidence', question: 'How can I feel more confident at work?', notes: 'Cards highlighted preparation and trusting your abilities.' }
+    { title: 'Financial Clarity', question: 'How can I improve my financial situation?', notes: 'Cards highlighted budgeting, patience, and avoiding impulsive spending.', created_at: '2024-01-10 10:15:00' },
+    { title: 'Career Guidance', question: 'What should I focus on to advance my career?', notes: 'The reading emphasized learning new skills and building relationships.', created_at: '2024-02-12 14:30:00' },
+    { title: 'Relationship Insight', question: 'How can I strengthen my relationship?', notes: 'Cards suggested open communication and mutual understanding.', created_at: '2024-03-08 09:20:00' },
+    { title: 'Love Reading', question: 'What should I know about my love life right now?', notes: 'The spread pointed to new opportunities for connection.', created_at: '2024-04-18 18:05:00' },
+    { title: 'Decision Making', question: 'Should I take the new opportunity?', notes: 'Cards advised balancing intuition with practical considerations.', created_at: '2024-05-06 11:45:00' },
+    { title: 'Monthly Outlook', question: 'What energy surrounds me this month?', notes: 'Themes of growth, patience, and reflection appeared.', created_at: '2024-06-21 16:10:00' },
+    { title: 'Personal Growth', question: 'How can I become a better version of myself?', notes: 'The reading encouraged self-confidence and consistency.', created_at: '2024-07-14 08:55:00' },
+    { title: 'Friendship Guidance', question: 'How can I improve a friendship?', notes: 'Cards emphasized honesty and quality time.', created_at: '2024-08-09 19:25:00' },
+    { title: 'Workplace Challenges', question: 'How should I handle current work stress?', notes: 'The spread suggested setting boundaries and staying focused.', created_at: '2024-09-03 12:40:00' },
+    { title: 'Family Matters', question: 'What should I focus on within my family?', notes: 'Cards highlighted compassion and understanding.', created_at: '2024-10-17 15:00:00' },
+    { title: 'Future Path', question: 'What direction is my life heading?', notes: 'The reading suggested gradual progress toward long-term goals.', created_at: '2024-11-11 10:30:00' },
+    { title: 'Creative Inspiration', question: 'How can I unlock more creativity?', notes: 'Cards encouraged experimentation and curiosity.', created_at: '2024-12-05 17:15:00' },
+    { title: 'Confidence Boost', question: 'How can I build my confidence?', notes: 'The spread pointed toward recognizing past successes.', created_at: '2025-01-09 09:10:00' },
+    { title: 'Spiritual Journey', question: 'What should I focus on spiritually?', notes: 'Cards suggested mindfulness and self-reflection.', created_at: '2025-02-14 13:35:00' },
+    { title: 'Life Balance', question: 'How can I create better balance?', notes: 'The reading highlighted the need for rest and prioritization.', created_at: '2025-03-22 08:20:00' },
+    { title: 'New Beginning', question: 'What should I know about this new chapter?', notes: 'Cards indicated optimism and fresh opportunities.', created_at: '2025-04-16 14:50:00' },
+    { title: 'Self-Care Reading', question: 'How can I take better care of myself?', notes: 'The spread encouraged healthy routines and boundaries.', created_at: '2025-05-07 11:05:00' },
+    { title: 'Goal Achievement', question: 'What will help me reach my goals?', notes: 'Cards emphasized persistence and planning.', created_at: '2025-06-18 16:25:00' },
+    { title: 'Communication Advice', question: 'How can I communicate more effectively?', notes: 'The reading suggested clarity and active listening.', created_at: '2025-07-10 09:45:00' },
+    { title: 'Inner Wisdom', question: 'What is my intuition trying to tell me?', notes: 'Cards encouraged trusting inner guidance.', created_at: '2025-08-23 18:10:00' },
+    { title: 'Career Change', question: 'Is it time for a career change?', notes: 'The spread suggested exploring possibilities while staying practical.', created_at: '2025-09-12 12:30:00' },
+    { title: 'Financial Opportunity', question: 'What opportunities are available financially?', notes: 'Cards pointed toward steady growth rather than quick rewards.', created_at: '2025-10-05 10:05:00' },
+    { title: 'Healing Reading', question: 'What do I need to heal from?', notes: 'The reading emphasized acceptance and patience.', created_at: '2025-11-19 15:40:00' },
+    { title: 'Travel Plans', question: 'What should I know about upcoming travel?', notes: 'Cards suggested flexibility and openness to surprises.', created_at: '2025-12-08 09:15:00' },
+    { title: 'Learning Journey', question: 'How can I learn more effectively?', notes: 'The spread highlighted consistency and curiosity.', created_at: '2026-01-14 13:00:00' },
+    { title: 'Leadership Reading', question: 'How can I become a better leader?', notes: 'Cards emphasized empathy and confidence.', created_at: '2026-02-09 17:20:00' },
+    { title: 'Romantic Potential', question: 'What potential exists in my romantic life?', notes: 'The reading suggested meaningful new connections.', created_at: '2026-03-18 11:10:00' },
+    { title: 'Stress Management', question: 'How can I reduce stress?', notes: 'Cards pointed toward simplicity and self-care.', created_at: '2026-04-06 08:35:00' },
+    { title: 'Long-Term Vision', question: 'What should I focus on for the future?', notes: 'The spread emphasized patience and strategic thinking.', created_at: '2026-05-21 16:55:00' },
+    { title: 'Career Confidence', question: 'How can I feel more confident at work?', notes: 'Cards highlighted preparation and trusting your abilities.', created_at: '2026-06-12 10:20:00' }
 ];
 
-// Reading_cards seed data (order does not match the above sample readings!)
+// Reading_cards seed data
 const readingCards = [
     // 1. Financial Clarity (3 cards)
     { reading_id: 1, card_id: 10, position_number: 1, position_name: "Past", is_reversed: false },
@@ -175,8 +173,8 @@ const readingCards = [
 
 db.serialize(() => {
     for (const reading of demoData) {
-        const sql = `INSERT INTO readings (title, question, notes) VALUES (?, ?, ?)`;
-        db.run(sql, [reading.title, reading.question, reading.notes]);
+        const sql = `INSERT INTO readings (title, question, notes, created_at) VALUES (?, ?, ?, ?)`;
+        db.run(sql, [reading.title, reading.question, reading.notes, reading.created_at]);
     }
     for (const readingCard of readingCards) {
         const sql = `INSERT INTO reading_cards (reading_id, card_id, position_number, position_name) VALUES (?, ?, ?, ?)`;

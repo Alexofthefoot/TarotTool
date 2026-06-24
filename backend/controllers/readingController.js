@@ -75,10 +75,10 @@ readingServices.deleteReading(req.params.id, (err, data) => {
 function getCardsPerReading(req, res) {
     readingServices.getCardsPerReading(req.params.id, (err, rows) => {
         if (err) {
-            res.status(500).send(err.message);
+            res.status(500).json(err.message);
         }
         else if (!rows) {
-            res.status(404).send('Reading ' + req.params.id + ' does not exist in DB.');
+            res.status(404).json('Reading ' + req.params.id + ' does not exist in DB.');
         }
         else {
             res.status(200).json(rows);

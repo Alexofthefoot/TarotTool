@@ -1,53 +1,79 @@
-/* Readings List */
-
-.reading-container {
+ /* ==========================================================================
+        GLOBAL COMPONENTS (Major Section)
+   ========================================================================== */ 
+main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
-
+/* ==========================================================================
+        THE READING CARD DIV
+   ========================================================================== */ 
 .reading-card {
     background: rgba(10, 5, 20, 0.5);
-
     border: 1px solid rgba(125, 95, 255, 0.2);
     border-radius: 12px;
-
-    padding: 25px;
+    padding: 25px 25px 25px 25px;
 
     backdrop-filter: blur(8px);
-
-    transition: 0.2s;
 }
 
-
-.reading-card:hover {
-    border-color: rgba(125, 95, 255, 0.6);
-    box-shadow: 0 0 15px rgba(125, 95, 255, 0.25);
+.reading-card {
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
 }
-
 
 .reading-card h2 {
     color: #c9a7ff;
     margin-top: 0;
 }
 
-
 .reading-card .question {
     color: #9adbb3;
     font-style: italic;
 }
-
 
 .reading-card .notes {
     color: #e7e1ff;
     opacity: 0.8;
 }
 
+.reading-card:hover {
+    border-color: rgba(125, 95, 255, 0.6);
+    box-shadow: 0 0 15px rgba(125, 95, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+        META SECTION AND DATESTAMP
+   ========================================================================== */ 
+.reading-meta {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.reading-date {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    
+    color: #9adbb3;
+    font-size: 0.85rem;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease
+                transform 0.25s ease;
+}
+
+/* ==========================================================================
+        CARD IMAGES & THEIR WRAPPER
+   ========================================================================== */ 
 .reading-images-wrapper {
     max-height: 0;
     overflow: hidden;
@@ -59,6 +85,12 @@
         max-height 0.35s ease,
         opacity 0.25s ease,
         transform 0.25s ease;
+}
+
+.reading-card:hover .reading-images-wrapper {
+    max-height: 120px;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .reading-images {
@@ -74,12 +106,53 @@
     flex-shrink: 0;
 }
 
-.reading-card:hover .reading-images {
-    display:flex;
+/* ==========================================================================
+        READING FOOTER & BUTTON
+   ========================================================================== */ 
+.reading-footer {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: 
+        opacity 0.25s ease, 
+        transform 0.25s ease;
+
+    margin-top: 20px; 
 }
 
-.reading-card:hover .reading-images-wrapper {
-    max-height: 120px; /* adjust for more cards */
+.reading-card:hover .reading-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.view-reading-btn {
+    text-decoration: none;
+
+    background: #3a1c5c;
+    border: 1px solid #7d5fff;
+    color: #e7e1ff;
+
+    padding: 8px 16px;
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.view-reading-btn:hover {
+    background: #5b2a8a;
+    box-shadow: 0 0 12px rgba(125, 95, 255, 0.5);
+}
+
+/* ==========================================================================
+        COMBINED DATE AND BUTTON REVEAL
+   ========================================================================== */ 
+   
+   .reading-card:hover .reading-date,
+.reading-card:hover .reading-footer {
     opacity: 1;
     transform: translateY(0);
 }
