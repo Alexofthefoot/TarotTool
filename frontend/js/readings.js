@@ -6,7 +6,9 @@ async function windowInit() {
     const readings = await fetchReadings();
     offset = 0; // reset the offset, as the reading wasnt displayed to the user
     limit = 10;
-    if (readings != null) {
+    console.log(readings)
+    if (readings != null && readings.length > 0) {
+        console.log('null should not be here')
         // remove placeholder data
         let wrapper = document.getElementsByClassName("card-wrapper")[0];
         wrapper.innerHTML = "";
