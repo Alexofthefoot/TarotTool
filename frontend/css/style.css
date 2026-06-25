@@ -71,6 +71,17 @@ header p {
     opacity: 0.8;
 }
 
+section {
+    max-width: 75%;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+
+    background: rgba(10, 5, 20, 0.5);
+    border: 1px solid rgba(125, 95, 255, 0.2);
+    border-radius: 12px;
+}
+
 /* Button */
 .controls {
     display: flex;
@@ -104,7 +115,9 @@ button:hover {
     background: rgba(10, 5, 20, 0.5);
     border: 1px solid rgba(125, 95, 255, 0.2);
     border-radius: 12px;
+}
 
+.card-display {
     backdrop-filter: blur(8px);
 }
 
