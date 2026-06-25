@@ -1,3 +1,10 @@
+/* Organize CSS by:
+    General styles (body, main, h1-4, maybe buttons?
+    utility classes?
+    sitewide (navbar)
+
+*/
+
 body {
     margin: 0;
     font-family: 'Georgia', serif;
@@ -50,7 +57,7 @@ body {
 /* Header */
 header {
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
 header h1 {
@@ -97,7 +104,8 @@ button:hover {
     box-shadow: 0 0 12px rgba(125, 95, 255, 0.5);
 }
 
-/* Card Display */
+
+/* Card Display - this might be specific to home, move to seperate file? */
 .card-display {
     max-width: 600px;
     margin: 0 auto;
@@ -122,3 +130,4 @@ button:hover {
     color: #e7e1ff;
     opacity: 0.8;
 }
+
