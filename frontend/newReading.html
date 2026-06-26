@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/newReading.css">
+    <script src="js/readings.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">🔮 Your Tarot Journal</div>
+
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Cards</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="newReading.html">New</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    <section>
+        <p>Empty for now</p>
+    </section>
+
+  <section>
+    <h2>Save Reading</h2>
+
+    <form class="reading-form">
+        <div class="form-group">
+            <label for="question">Question</label>
+            <input
+                type="text"
+                id="question"
+                name="question"
+                placeholder="What guidance are you seeking?"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="interpretation">Interpretation</label>
+            <textarea
+                id="interpretation"
+                name="interpretation"
+                rows="10"
+                placeholder="Record your interpretation..."
+            ></textarea>
+        </div>
+
+        <button type="submit">Save Reading</button>
+    </form>
+</section>
+</body>
+
+</html>
