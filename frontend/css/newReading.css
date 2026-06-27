@@ -1,4 +1,6 @@
-/* Form */
+/* ==========================================================================
+        OVERALL FORM STYLES
+   ========================================================================== */
 
 .reading-form {
     max-width: 700px;
@@ -16,10 +18,9 @@
     text-align: left;
 }
 
-.form-group label,
-.form-group p {
+.form-group label {
     margin-bottom: 8px;
-
+    margin-top: 8px;
     color: #c9a7ff;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
@@ -55,7 +56,8 @@
 }
 
 .form-group input::placeholder,
-.form-group textarea::placeholder {
+.form-group textarea::placeholder,
+.user-note {
     color: rgba(231, 225, 255, 0.45);
 }
 
@@ -72,8 +74,11 @@
     background: rgba(30, 18, 48, 0.9);
 }
 
+/* ==========================================================================
+        NUMERAL BUTTONS
+   ========================================================================== */
 /* .reading-form is flex column, so this is a flex row within that column */
-.button-row, .card-button-row {
+.button-row {
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -82,6 +87,10 @@
 .button-row button {
     min-width: 130px;
 }
+
+/* ==========================================================================
+        CARD BUTTONS & LABELS
+   ========================================================================== */
 
 .card-selection-btn {
     background: transparent;
@@ -105,4 +114,46 @@
     transform: translateY(-4px);
 }
 
+.spread-board {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
 
+    margin: 10;
+}
+.spread-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.card-position-label {
+    color: #c9a7ff;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.85;
+
+    text-align: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+
+    min-width: 80px;
+    transition: 0.2s;
+    outline: none;
+}
+
+.card-position-label:hover {
+    background: rgba(125, 95, 255, 0.1);
+    cursor: text;
+}
+
+.card-position-label:focus {
+    background: rgba(30, 18, 48, 0.9);
+    border: 1px solid rgba(154, 219, 179, 0.4);
+    box-shadow: 0 0 12px rgba(154, 219, 179, 0.15);
+}
+
+/* .control-buttons  button{
+    
+} */

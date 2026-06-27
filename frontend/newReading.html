@@ -46,22 +46,34 @@
                         <button type="button" onclick="setButtons(5)">5</button>
                     </div>
                     <br>
-                    <div class="card-button-row">
-                        <button class="card-selection-btn" type="button">
-                            <img src="../frontend/assets/Cards-png/CardBacks.png">
-                        </button>
-                        <button class="card-selection-btn" type="button">
-                            <img src="../frontend/assets/Cards-png/CardBacks.png">
-                        </button>
-                        <button class="card-selection-btn" type="button">
-                            <img src="../frontend/assets/Cards-png/CardBacks.png">
-                        </button>
-                        <button class="card-selection-btn" type="button">
-                            <img src="../frontend/assets/Cards-png/CardBacks.png">
-                        </button>
-                        <button class="card-selection-btn" type="button">
-                            <img src="../frontend/assets/Cards-png/CardBacks.png">
-                        </button>
+                    <div class="spread-board" id="spreadBoard">
+                        <div class="spread-slot">
+                            <button class="card-selection-btn" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Past</div>
+                        </div>
+
+                        <div class="spread-slot">
+                            <button class="card-selection-btn" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Present</div>
+                        </div>
+
+                        <div class="spread-slot">
+                            <button class="card-selection-btn" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Future</div>
+                        </div>
+                 
+                    </div>
+                    <div class="control-buttons">
+                        <br>
+                        <button id="clear-position" type="button" onclick="clearPositions()">Clear Position Names</button>
+                        <button id="reset-position" type="button" onclick="resetPositions()">Reset to Default</button>
+                        <p class="user-note">Defaults are editable in user settings</p>
                     </div>
                 </div>
 
@@ -73,12 +85,8 @@
 
                 <button type="submit">Save Reading</button>
             </form>
-
         </section>
-
-
     </main>
-
 </body>
 
 </html>
