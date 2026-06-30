@@ -7,7 +7,7 @@
     <title>Tarot</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/newReading.css">
-    <script defer src="js/newReading.js"></script>
+    <script type="module" defer src="js/newReading.js"></script>
 </head>
 
 <body>
@@ -92,26 +92,25 @@
         </section>
     </main>
 
-    <!-- The Modal Window -->
+
     <div id="modal-window" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <h3 id="modal-title"></h3>
             <span class="close" id="close-modal">&times;</span>
 
             <div class="display-options">
-                <input type="radio" id="display-images" name="display" value="images" checked>
+                <input type="radio" id="display-images" name="display" value="images">
                 <label for="display-images">Images</label>
                 <input type="radio" id="display-text" name="display" value="text">
-                <label for="display-text">Text Only</label>
+                <label for="display-text">Text</label>
             </div>
 
             <div class="data-type-selection">
-                <button type="button" data-type="major">Major Arcana</button>
-                <button type="button" data-type="wands">Wands</button>
-                <button type="button" data-type="cups">Cups</button>
-                <button type="button" data-type="swords">Swords</button>
-                <button type="button" data-type="pentacles">Pentacles</button>
+                <button type="button" data-type="major" id="major-selection">Major Arcana</button>
+                <button type="button" data-type="wands" id="wands-selection">Wands</button>
+                <button type="button" data-type="cups" id="cups-selection">Cups</button>
+                <button type="button" data-type="swords" id="swords-selection">Swords</button>
+                <button type="button" data-type="pentacles" id="pentacles-selection">Pentacles</button>
             </div>
             <div class="card-selection" id="card-selection-container">
                 <!-- this will be put in dynamically in the final produt -->

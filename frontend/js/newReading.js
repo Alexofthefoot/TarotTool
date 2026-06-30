@@ -1,6 +1,13 @@
+// const tarotDeck = require('../assets/tarotDeck.js');
+import { tarotDeck } from "../assets/tarotDeck.js";
+
 const DEFAULT_POSITIONS = ['Past', 'Present', 'Future'];
 const DEFAULT_NUMBER_OF_CARDS = 3;
+const DEFAULT_CARD_TYPE = 'images';
+
 let CURRENT_NUMBER_OF_CARDS = 3;
+let CURRENT_CARD_TYPE = 'images';
+let CURRENT_CARD_SUIT = 'major';
 
 function setupEventHandlers() {
     //The button-row buttons
@@ -21,19 +28,6 @@ function setupEventHandlers() {
             openModal(i + 1);
         });
     }
-    // Closing the modal window
-    const modal = document.getElementById("modal-window");
-    const span = document.getElementById('close-modal');
-    span.addEventListener("click", () => {
-        modal.style.display = "none";
-        console.log('closing modal window via span event listener');
-    });
-    window.addEventListener("click", (event) => {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            console.log('closing modal window via window click event listener');
-        }
-    });
     // Card position buttons
     const resetBtn = document.getElementById('reset-position');
     resetBtn.addEventListener("click", resetPositions);
@@ -46,9 +40,79 @@ function setupEventHandlers() {
         console.log('submit button');
 
     });
+    setupModalEventHandlers();
 }
 
-// Adjusts number of card buttons up or down
+function setupModalEventHandlers() {
+    // Set defaults according to user preferences
+    CURRENT_CARD_TYPE = DEFAULT_CARD_TYPE;
+    const imageBtn = document.getElementById('display-images');
+    const textBtn = document.getElementById('display-text');
+    if (DEFAULT_CARD_TYPE == 'images') {
+        imageBtn.checked = true;
+    }
+    else {
+        textBtn.checked = true;
+    }
+    // User chooses IMAGES or TEXT
+    imageBtn.addEventListener('change', () => {
+        changeModalCardType('images')
+    });
+    textBtn.addEventListener('change', () => {
+        changeModalCardType('text');
+    });
+    // User chooses their card type (of 5 options)
+    const majorBtn = document.getElementById('major-selection');
+    majorBtn.addEventListener('click', () => {
+        changeModalCardSuit('major');
+    });
+    const wandsBtn = document.getElementById('wands-selection');
+    wandsBtn.addEventListener('click', () => {
+        changeModalCardSuit('wands');
+    });
+    const cupsBtn = document.getElementById('cups-selection');
+    cupsBtn.addEventListener('click', () => {
+        changeModalCardSuit('cups');
+    });
+    const swordsBtn = document.getElementById('swords-selection');
+    swordsBtn.addEventListener('click', () => {
+        changeModalCardSuit('swords');
+    });
+    const pentaclesBtn = document.getElementById('pentacles-selection');
+    pentaclesBtn.addEventListener('click', () => {
+        changeModalCardSuit('pentacles');
+    });
+
+    // Closing the modal window
+    const modal = document.getElementById('modal-window');
+    const span = document.getElementById('close-modal');
+    span.addEventListener('click', () => {
+        modal.style.display = 'none';
+        console.log('closing modal window via span event listener');
+    });
+    window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+            console.log('closing modal window via window click event listener');
+        }
+    });
+}
+
+// Changes the modal window's display between image-based and text-based
+function changeModalCardType(type) {
+    CURRENT_CARD_TYPE = type;
+    setModalCards();
+}
+
+// Changes the modal window's suit currently being displayed
+function changeModalCardSuit(suit) {
+    if (CURRENT_CARD_SUIT != suit){
+        CURRENT_CARD_SUIT = suit;
+        setModalCards();
+    } 
+}
+
+// Adjusts number of spread card buttons up or down
 function changeNumberofCards(num) {
     if (num == CURRENT_NUMBER_OF_CARDS) {
         return;
@@ -62,7 +126,7 @@ function changeNumberofCards(num) {
     CURRENT_NUMBER_OF_CARDS = num;
 }
 
-// Adds the desired number of buttons to HTML structure
+// Adds the desired number of spread buttons to HTML structure
 function addCards(num) {
     const parentDiv = document.getElementById("spreadBoard");
     for (let i = 0; i < num; i++) {
@@ -91,7 +155,7 @@ function addCards(num) {
     }
 }
 
-// Removes the desired number of buttons from HTML structure
+// Removes the desired number of spread buttons from HTML structure
 function removeCards(num) {
     const parentDiv = document.getElementById("spreadBoard");
     for (let i = 0; i < num; i++) {
@@ -127,26 +191,46 @@ function openModal(cardID) {
     title.textContent = string;
 
     //set default card type (major)
-    setModalCards("arcana", "images");
+    setModalCards();
 }
 
-function setModalCards(cardSuit, displayType) {
+function setModalCards() {
     //10 possible configurations (eg. images cups, text swords, ...)
-    const cardinfo = [];
+    // tarotDeck[]
     const parentDiv = document.getElementById("card-selection-container");
     parentDiv.innerHTML = "";
-    
-    if (displayType == "images") {
-        for (let i = 0; i < 14; i++) {
+    // major arcana
+    let offset = 0;
+    let length = 22;
+    //all 4 minor suits have 14 cards
+    if (CURRENT_CARD_SUIT != "major") { 
+        length = 14;
+    }
+    // Set offsets to line up with relevant suits
+    if (CURRENT_CARD_SUIT === "wands") {
+        offset = 22;
+    }
+    else if (CURRENT_CARD_SUIT === "cups") {
+        offset = 36;
+    }
+    else if (CURRENT_CARD_SUIT === "swords") {
+        offset = 50;
+    }
+    else if (CURRENT_CARD_SUIT === "pentacles") {
+        offset = 64;
+    }
+
+    if (CURRENT_CARD_TYPE === "images") {
+        for (let i = offset; i < offset + length; i++) {
             const newButton = document.createElement("button");
             newButton.className = "card-selection-btn";
-            newButton.dataset.card = "";
+            newButton.dataset.card = tarotDeck[i].name;
             newButton.dataset.id = ""
 
-
             const newImg = document.createElement("img");
-            newImg.src = "../frontend/assets/Cards-png/CardBacks.png";
-            newImg.alt = "Blank card back";
+            const imgPath = "../frontend/assets/Cards-png/" + tarotDeck[i].image_location;
+            newImg.src = imgPath;
+            newImg.alt = tarotDeck[i].name;
 
             newButton.appendChild(newImg);
             parentDiv.appendChild(newButton);
@@ -154,20 +238,17 @@ function setModalCards(cardSuit, displayType) {
     }
     // else display in text format
     else {
-        for (let i = 0; i < 14; i++) {
+        for (let i = offset; i < offset + length; i++) {
             const newButton = document.createElement("button");
             newButton.classList.add("card-btn-as-text");
-            newButton.classList.add( "card-selection-btn");
-            newButton.dataset.card = "";
+            newButton.classList.add("card-selection-btn");
+            newButton.dataset.card = tarotDeck[i].name;
             newButton.dataset.id = ""
-            newButton.textContent = "A card name";
+            newButton.textContent = tarotDeck[i].name;
             parentDiv.appendChild(newButton);
         }
     }
-
 }
-
-
 
 
 window.onload = function () {
