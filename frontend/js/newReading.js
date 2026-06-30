@@ -35,10 +35,10 @@ function setupEventHandlers() {
         }
     });
     // Card position buttons
-     const resetBtn = document.getElementById('reset-position');
-     resetBtn.addEventListener("click", resetPositions);
-     const clearBtn = document.getElementById('clear-position');
-     clearBtn.addEventListener("click", clearPositionNames);
+    const resetBtn = document.getElementById('reset-position');
+    resetBtn.addEventListener("click", resetPositions);
+    const clearBtn = document.getElementById('clear-position');
+    clearBtn.addEventListener("click", clearPositionNames);
     // Submitting the form
     const form = document.getElementById('reading-form');
     form.addEventListener("submit", async function (event) {
@@ -75,7 +75,7 @@ function addCards(num) {
 
         newDiv.className = "spread-slot";
         newButton.type = "button";
-        newButton.className = "card-selection-btn";
+        newButton.className = "spread-buttons";
         newButton.id = "spread-" + idVal;
         newButton.addEventListener("click", () => {
             openModal(idVal);
@@ -120,9 +120,52 @@ function openModal(cardID) {
     const modal = document.getElementById('modal-window');
     console.log("opening modal for card " + cardID);
     modal.style.display = "block";
+
+    // Adjust text 
+    const title = document.getElementById('modal-title');
+    const string = "Select a Card for Position " + cardID;
+    title.textContent = string;
+
+    //set default card type (major)
+    setModalCards("arcana", "images");
 }
 
+function setModalCards(cardSuit, displayType) {
+    //10 possible configurations (eg. images cups, text swords, ...)
+    const cardinfo = [];
+    const parentDiv = document.getElementById("card-selection-container");
+    parentDiv.innerHTML = "";
+    
+    if (displayType == "images") {
+        for (let i = 0; i < 14; i++) {
+            const newButton = document.createElement("button");
+            newButton.className = "card-selection-btn";
+            newButton.dataset.card = "";
+            newButton.dataset.id = ""
 
+
+            const newImg = document.createElement("img");
+            newImg.src = "../frontend/assets/Cards-png/CardBacks.png";
+            newImg.alt = "Blank card back";
+
+            newButton.appendChild(newImg);
+            parentDiv.appendChild(newButton);
+        }
+    }
+    // else display in text format
+    else {
+        for (let i = 0; i < 14; i++) {
+            const newButton = document.createElement("button");
+            newButton.classList.add("card-btn-as-text");
+            newButton.classList.add( "card-selection-btn");
+            newButton.dataset.card = "";
+            newButton.dataset.id = ""
+            newButton.textContent = "A card name";
+            parentDiv.appendChild(newButton);
+        }
+    }
+
+}
 
 
 

@@ -89,10 +89,10 @@
 }
 
 /* ==========================================================================
-        CARD BUTTONS & LABELS
+        SPREAD BUTTONS & LABELS
    ========================================================================== */
 
-.card-selection-btn {
+.spread-buttons {
     background: transparent;
     border: none;
     padding: 0;
@@ -104,13 +104,13 @@
     justify-content: center;
 }
 
-.card-selection-btn img {
+.spread-buttons img {
     display: block;
     width: 120px;
     height: auto;
 }
 
-.card-selection-btn:hover {
+.spread-buttons:hover {
     transform: translateY(-4px);
 }
 
@@ -119,8 +119,6 @@
     justify-content: center;
     align-items: flex-start;
     gap: 12px;
-
-    margin: 10;
 }
 
 .spread-slot {
@@ -156,16 +154,12 @@
     box-shadow: 0 0 12px rgba(154, 219, 179, 0.15);
 }
 
-/* .control-buttons  button{
-    
-} */
-
 /* ==========================================================================
         MODAL WINDOW
    ========================================================================== */
 
 
-/* The Modal (background) */
+/* The Modal (background) taken from w3schools*/
 .modal {
     display: none;
     /* Hidden by default */
@@ -193,9 +187,7 @@
 .modal-content {
     margin: 15% auto;
     /* 15% from the top and centered */
-    padding: 20px;
-    width: 80%;
-    /* Could be more or less, depending on screen size */
+    
     position: relative;
 
     width: min(600px, 90%);
@@ -213,22 +205,125 @@
 
     color: #e7e1ff;
 }
+/* Choosing images or text based */
+.display-options {
+    display: inline-flex;
+    margin: 15px 0 20px;
+}
+.display-options input[type="radio"] {
+    display: none;
+}
+.display-options label {
+    padding: 8px 18px;
+
+    background: rgba(125, 95, 255, 0.08);
+    color: #b8aedf;
+
+    border: 1px solid rgba(125, 95, 255, 0.25);
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: 0.2s ease;
+}
+.display-options label:first-of-type {
+    border-radius: 8px 0 0 8px;
+}
+
+.display-options label:last-of-type {
+    border-radius: 0 8px 8px 0;
+    border-left: none;
+}
+
+.display-options input[type="radio"]:checked + label {
+    background: rgba(125, 95, 255, 0.35);
+    color: #e7e1ff;
+    border-color: #9adbb3;
+
+    box-shadow: 0 0 12px rgba(154, 219, 179, 0.25);
+}
+.display-options label:hover {
+    background: rgba(125,95, 255, 0.18);
+}
+
+/* which card category/suit (eg. Major arcana, swords, etc */
+.data-type-selection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.data-type-selection button:active {
+    background: rgba(125, 95 ,255, 0.35);
+    color: #e7e1ff;
+    border-color: #9adbb3;
+}
 
 /* The Close Button */
 .close {
-    color: #aaa;
     color: rgba(125, 95, 255, 0.25);
-    float: right;
     font-size: 28px;
     font-weight: bold;
+
+    position: absolute;
+    top: 18px;
+    right: 18px;
 }
 
 .close:hover,
 .close:focus {
     border-color: white;
     border: 1px solid #9adbb3;
+    border-radius: 6px;
 
     color: #e7e1ff;
     text-decoration: none;
     cursor: pointer;
+}
+
+.card-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 102px);
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.card-selection-btn {
+    justify-content: center;
+    background: rgba(125, 95, 255, 0.12);
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid rgba(125, 95, 255, 0.35);
+    border-radius: 3px;
+
+    color: #e7e1ff;
+
+    transition: 0.2s;
+}
+
+/*  TODO: 
+    Revisit the size/shape/background color of these buttons.
+*/
+.card-btn-as-text {
+    height: 175px;
+    /* height: 100px; */
+    width: 100px;
+}
+
+.card-selection-btn img {
+    display: block;
+    width: 100px;
+    height: auto;
+}
+
+.card-selection-btn:hover {
+    transform: translateY(-2px);
+
+    border-color: #9adbb3;
+
+    box-shadow: 0 0 15px rgba(154, 219, 179, 0.3);
 }

@@ -28,6 +28,7 @@
             <h1>Save Reading</h1>
         </header>
 
+
         <section>
             <form id="reading-form">
                 <div class="form-group">
@@ -47,39 +48,24 @@
                     </div>
                     <br>
 
-                    <!-- The Modal -->
-                    <div id="modal-window" class="modal">
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <h3>Select A Card</h3>
-                            <button type="button">Major Arcana</button>
-                            <button type="button">Wands</button> </h3>
-                            <button type="button">Cups</button>
-                            <button type="button">Swords</button>
-                            <button type="button">Pentacles</button>
-                            <span class="close" id="close-modal">&times;</span>
-                            <p>Some text in the Modal..</p>
-                        </div>
 
-
-                    </div>
                     <div class="spread-board" id="spreadBoard">
                         <div class="spread-slot">
-                            <button id="spread-1" class="card-selection-btn" type="button">
+                            <button id="spread-1" class="spread-buttons" type="button">
                                 <img src="../frontend/assets/Cards-png/CardBacks.png">
                             </button>
                             <div class="card-position-label" contenteditable="true">Past</div>
                         </div>
 
                         <div class="spread-slot">
-                            <button id="spread-2" class="card-selection-btn" type="button">
+                            <button id="spread-2" class="spread-buttons" type="button">
                                 <img src="../frontend/assets/Cards-png/CardBacks.png">
                             </button>
                             <div class="card-position-label" contenteditable="true">Present</div>
                         </div>
 
                         <div class="spread-slot">
-                            <button id="spread-3" class="card-selection-btn" type="button">
+                            <button id="spread-3" class="spread-buttons" type="button">
                                 <img src="../frontend/assets/Cards-png/CardBacks.png">
                             </button>
                             <div class="card-position-label" contenteditable="true">Future</div>
@@ -105,6 +91,36 @@
             </form>
         </section>
     </main>
+
+    <!-- The Modal Window -->
+    <div id="modal-window" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <span class="close" id="close-modal">&times;</span>
+
+            <div class="display-options">
+                <input type="radio" id="display-images" name="display" value="images" checked>
+                <label for="display-images">Images</label>
+                <input type="radio" id="display-text" name="display" value="text">
+                <label for="display-text">Text Only</label>
+            </div>
+
+            <div class="data-type-selection">
+                <button type="button" data-type="major">Major Arcana</button>
+                <button type="button" data-type="wands">Wands</button>
+                <button type="button" data-type="cups">Cups</button>
+                <button type="button" data-type="swords">Swords</button>
+                <button type="button" data-type="pentacles">Pentacles</button>
+            </div>
+            <div class="card-selection" id="card-selection-container">
+                <!-- this will be put in dynamically in the final produt -->
+                <!-- <button class="card-selection-btn" data-card="Ace of Cups" data-id="cups01">
+                    <img src="assets/Cards-png/Cups01.png" alt="Ace of Cups">
+                </button> -->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
