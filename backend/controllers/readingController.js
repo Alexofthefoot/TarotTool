@@ -1,4 +1,4 @@
-const readingServices = require('../services/readingServices');
+import readingServices  from '../services/readingServices.js';
 
 // ...readings/
 function getAllReadings(req, res) {
@@ -86,11 +86,13 @@ function getCardsPerReading(req, res) {
     })
 }
 
-module.exports = {
+const readingController =  {
     getAllReadings,
     createReading,
     getReading,
     updateReading,
     deleteReading, 
     getCardsPerReading
-}
+};
+
+export default readingController

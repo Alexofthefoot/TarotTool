@@ -1,4 +1,4 @@
-const db = require('../database');
+import db from '../database.js';
 // db.run() for state changes, returns metadata
 // db.get() for retreiving exactly 1 row,
 // db. all() for retreiving array of rows
@@ -52,11 +52,13 @@ const getCardsPerReading = (id, callback) => {
     db.all(sql, [id], callback);
 }
 
-module.exports = {
+const readingServices =  {
     getAllReadings,
     createReading,
     getReading,
     updateReading,
     deleteReading, 
     getCardsPerReading
-}
+};
+
+export default readingServices

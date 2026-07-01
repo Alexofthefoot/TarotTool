@@ -1,4 +1,4 @@
-const db = require('../database');
+import db from '../database.js';
 
 const getAllReadingCards = (callback) => {
     const sql = `SELECT * FROM reading_cards`;
@@ -26,8 +26,10 @@ const deleteReadingCard = (id, callback) => {
     });
 }
 
-module.exports = {
+const reading_cardServices = {
     getAllReadingCards,
     createReadingCard, 
     deleteReadingCard
 };
+
+export default reading_cardServices

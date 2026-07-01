@@ -4,7 +4,7 @@
 //      deciding HTTP status codes
 //      sending JSON response
 //      error handling
-const cardServices = require('../services/cardServices');
+import cardServices from '../services/cardServices.js';
 
 // ...cards/
 function getAllCards(req, res) {
@@ -95,7 +95,8 @@ function deleteCard(req, res) {
     })
 };
 
-module.exports = {
+
+const cardController = {
     getAllCards,
     createCard,
     getRandomCard,
@@ -103,3 +104,5 @@ module.exports = {
     updateCard,
     deleteCard
 };
+
+export default cardController

@@ -1,7 +1,9 @@
-const sqlite3 = require('sqlite3').verbose()
+import sqlite3 from 'sqlite3';
+
+const sql = sqlite3.verbose();
 const dbname = 'tarotData.db'
 
-let db = new sqlite3.Database(dbname, (err) => {
+let db = new sql.Database(dbname, (err) => {
     if (err) {
         console.error(err.message)
     }
@@ -64,4 +66,4 @@ let db = new sqlite3.Database(dbname, (err) => {
     })
 });
 
-module.exports = db;
+export default db

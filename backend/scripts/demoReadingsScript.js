@@ -1,4 +1,4 @@
-const db = require('../database');
+import db from '../database.js';
 
 const demoData = [
     { title: 'Financial Clarity', question: 'How can I improve my financial situation?', notes: 'Cards highlighted budgeting, patience, and avoiding impulsive spending.', created_at: '2024-01-10 10:15:00' },

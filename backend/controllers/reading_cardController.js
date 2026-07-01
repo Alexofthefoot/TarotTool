@@ -1,4 +1,4 @@
-const reading_cardServices = require('../services/reading_cardServices');
+import reading_cardServices from '../services/reading_cardServices.js';
 
 function getAllReadingCards(req, res) {
     reading_cardServices.getAllReadingCards((err, rows) => {
@@ -37,8 +37,10 @@ function deleteReadingCard(req, res) {
     })
 };
 
-module.exports = {
+const reading_cardController = {
     getAllReadingCards,
     createReadingCard,
     deleteReadingCard
-}
+};
+
+export default reading_cardController

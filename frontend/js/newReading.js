@@ -1,5 +1,4 @@
-// const tarotDeck = require('../assets/tarotDeck.js');
-import { tarotDeck } from "../assets/tarotDeck.js";
+import tarotDeck from "../assets/tarotDeck.js";
 
 const DEFAULT_POSITIONS = ['Past', 'Present', 'Future'];
 const DEFAULT_NUMBER_OF_CARDS = 3;

@@ -1,5 +1,5 @@
-const express = require('express');
-const reading_cardController = require('../controllers/reading_cardController');
+import express from 'express';
+import reading_cardController from '../controllers/reading_cardController.js';
 
 const reading_cardRouter = express.Router();
 reading_cardRouter.route('/')
@@ -9,4 +9,4 @@ reading_cardRouter.route('/')
 reading_cardRouter.route('/:id')
 .delete(reading_cardController.deleteReadingCard);
 
-module.exports = reading_cardRouter;
+export default reading_cardRouter

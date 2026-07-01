@@ -1,4 +1,4 @@
-export const tarotDeck = [
+const tarotDeck = [
     // Major Arcana
     { name: 'The Fool', arcana: 'Major', deck_order: 0, image_location: '00-TheFool.png' },
     { name: 'The Magician', arcana: 'Major', deck_order: 1, image_location: '01-TheMagician.png' },
@@ -87,3 +87,5 @@ export const tarotDeck = [
     { name: 'Queen of Pentacles', arcana: 'Minor', suit: 'Pentacles', rank: 'Queen', rank_number: 13, deck_order: 76, image_location: 'Pentacles13.png' },
     { name: 'King of Pentacles', arcana: 'Minor', suit: 'Pentacles', rank: 'King', rank_number: 14, deck_order: 77, image_location: 'Pentacles14.png' }
 ];
+
+export default tarotDeck

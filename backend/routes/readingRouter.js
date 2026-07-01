@@ -1,5 +1,5 @@
-const express = require('express');
-const readingController = require('../controllers/readingController');
+import express from 'express';
+import readingController from '../controllers/readingController.js';
 
 const readingRouter = express.Router();
 readingRouter.route('/')
@@ -14,4 +14,4 @@ readingRouter.route('/:id')
 readingRouter.route('/:id/cards')
 .get(readingController.getCardsPerReading)
 
-module.exports = readingRouter;
+export default readingRouter
