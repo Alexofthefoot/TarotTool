@@ -31,7 +31,7 @@ function setupGeneralEventHandlers() {
     }
     // Card position buttons
     const resetBtn = document.getElementById('reset-position');
-    resetBtn.addEventListener("click", resetPositions);
+    resetBtn.addEventListener("click", resetSpread);
     const clearBtn = document.getElementById('clear-position');
     clearBtn.addEventListener("click", clearPositionNames);
 
@@ -128,9 +128,10 @@ function clearPositionNames() {
     }
 }
 
-// TODO:
-// Should this reset card number too?
-function resetPositions() {
+// Reset positions & number of cards in the spread
+function resetSpread() {
+    removeCards(CURRENT_NUMBER_OF_CARDS);
+    addCards(DEFAULT_NUMBER_OF_CARDS);
     const labels = document.getElementsByClassName("card-position-label");
     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS && i < DEFAULT_POSITIONS.length; i++) {
         labels[i].innerHTML = DEFAULT_POSITIONS[i];
