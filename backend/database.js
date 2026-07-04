@@ -35,7 +35,7 @@ let db = new sql.Database(dbname, (err) => {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT,
                 question TEXT,
-                notes TEXT,
+                interpretation TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`, (err) => {
             if (err) {
                 console.error(err.message)
