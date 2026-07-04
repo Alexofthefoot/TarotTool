@@ -16,8 +16,8 @@ function getAllReadings(req, res) {
 };
 
 function createReading(req, res) {
-    const { title, question, notes } = req.body;
-    readingServices.createReading(title, question, notes, (err, data) => {
+    const { title, question, interpretation } = req.body;
+    readingServices.createReading(title, question, interpretation, (err, data) => {
         if (err) {
             res.status(500).send(err.message);
         }

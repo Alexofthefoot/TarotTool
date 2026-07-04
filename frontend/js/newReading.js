@@ -16,7 +16,7 @@ function setupGeneralEventHandlers() {
     for (let i = 0; i < parentDiv.children.length; i++) {
         const button = parentDiv.children[i];
         button.addEventListener("click", () => {
-            changeNumberofCards(i + 1);
+            changeSizeofSpread(i + 1);
         });
     }
     // The spread board card/buttons
@@ -38,8 +38,12 @@ function setupGeneralEventHandlers() {
     const form = document.getElementById('reading-form');
     form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Stop reload
-        console.log('submit button');
-
+        if (verifyInput()) {
+            await submitNewReading();
+        }
+        else {
+            console.log('missing input, not awaiting')
+        }
     });
 }
 
@@ -70,21 +74,21 @@ function setupModalEventHandlers() {
 }
 
 // Adjusts number of spread card buttons up or down
-function changeNumberofCards(num) {
+function changeSizeofSpread(num) {
     if (num == CURRENT_NUMBER_OF_CARDS) {
         return;
     }
     else if (num > CURRENT_NUMBER_OF_CARDS) {
-        addCards(num - CURRENT_NUMBER_OF_CARDS);
+        increaseSpread(num - CURRENT_NUMBER_OF_CARDS);
     }
     else {
-        removeCards(CURRENT_NUMBER_OF_CARDS - num);
+        decreaseSpread(CURRENT_NUMBER_OF_CARDS - num);
     }
     CURRENT_NUMBER_OF_CARDS = num;
 }
 
 // Adds the desired number of spread buttons to HTML structure
-function addCards(num) {
+function increaseSpread(num) {
     const parentDiv = document.getElementById("spreadBoard");
     for (let i = 0; i < num; i++) {
         const newDiv = document.createElement("div");
@@ -98,6 +102,7 @@ function addCards(num) {
         newButton.type = "button";
         newButton.className = "spread-buttons";
         newButton.id = "spread-" + idVal;
+        newButton.dataset.deckOrder = null;
         newButton.addEventListener("click", () => {
             openModal(idVal);
         });
@@ -113,7 +118,7 @@ function addCards(num) {
 }
 
 // Removes the desired number of spread buttons from HTML structure
-function removeCards(num) {
+function decreaseSpread(num) {
     const parentDiv = document.getElementById("spreadBoard");
     for (let i = 0; i < num; i++) {
         parentDiv.children[parentDiv.children.length - 1].remove();
@@ -129,8 +134,8 @@ function clearPositionNames() {
 
 // Reset positions & number of cards in the spread
 function resetSpread() {
-    removeCards(CURRENT_NUMBER_OF_CARDS);
-    addCards(DEFAULT_NUMBER_OF_CARDS);
+    decreaseSpread(CURRENT_NUMBER_OF_CARDS);
+    increaseSpread(DEFAULT_NUMBER_OF_CARDS);
     const labels = document.getElementsByClassName("card-position-label");
     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS && i < DEFAULT_POSITIONS.length; i++) {
         labels[i].innerHTML = DEFAULT_POSITIONS[i];
@@ -154,11 +159,12 @@ function changeModalCardSuit(suit, cardID) {
     }
 }
 
-function setPositioncard(cardID, deckOrder) {
+function setPositionCard(cardID, deckOrder) {
     const modal = document.getElementById('modal-window');
     const string = 'spread-' + cardID;
     const btn = document.getElementById(string);
     btn.innerHTML = "";
+    btn.dataset.deckOrder = deckOrder;
     const newImg = document.createElement('img');
     const path = "../frontend/assets/Cards-png/";
     newImg.src = path + tarotDeck[deckOrder].image_location;
@@ -191,7 +197,7 @@ function openModal(cardID) {
     container.innerHTML = "";
     const types = ['major', 'wands', 'cups', 'swords', 'pentacles'];
     const names = ['Major Arcana', 'Wands', 'Cups', 'Swords', 'Pentacles'];
-    for (let i = 0; i < types.length; i++){
+    for (let i = 0; i < types.length; i++) {
         const typeBtn = document.createElement('button');
         typeBtn.id = types[i] + '-selection';
         typeBtn.dataset.type = types[i];
@@ -234,9 +240,9 @@ function setModalCards(cardID) {
             const newButton = document.createElement("button");
             newButton.className = "card-selection-btn";
             newButton.dataset.card = tarotDeck[i].name;
-            newButton.dataset.id = ""
+            newButton.dataset.deckOrder = tarotDeck[i].deck_order;
             newButton.addEventListener('click', () => {
-                setPositioncard(cardID, i);
+                setPositionCard(cardID, i);
             })
 
             const newImg = document.createElement("img");
@@ -255,13 +261,108 @@ function setModalCards(cardID) {
             newButton.classList.add("card-btn-as-text");
             newButton.classList.add("card-selection-btn");
             newButton.dataset.card = tarotDeck[i].name;
-            newButton.dataset.id = ""
+            newButton.dataset.deckOrder = tarotDeck[i].deck_order;
             newButton.textContent = tarotDeck[i].name;
             newButton.addEventListener('click', () => {
-                setPositioncard(cardID, i);
+                setPositionCard(cardID, i);
             })
             parentDiv.appendChild(newButton);
         }
+    }
+}
+
+// TODO:
+// For now this works, but think about weird edgecases like "    "
+function verifyInput() {
+    // A reading requires a question
+    const question = document.getElementById('question').value;
+    if (question === null || question === "") {
+        console.log('Reading does not have a question')
+        return false;
+    }
+    for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
+        const string = 'spread-' + (i + 1);
+        const btn = document.getElementById(string);
+        //And all the cards in the spread to be drawn and non-null
+        if (btn.dataset.deckOrder === undefined || btn.dataset.deckOrder === null) {
+            console.log('card ' + (i + 1) + ' has not been selected.')
+            return false;
+        }
+    }
+    console.log('no problems with input');
+    return true;
+}
+
+// Create the json object for the reading POST request 
+function makeReadingBody() {
+    let body = {};
+    body = addIfPresent(body, 'title');
+    body = addIfPresent(body, 'question');
+    body = addIfPresent(body, 'interpretation');
+    console.log(body);
+    return body;
+}
+
+// Create the json object for the reading_cards POST request 
+// function makeReadingCardBody(readingID) {
+//     console.log('now attempting to make reading_cards json body')
+//     let body = {};
+//     body['reading_id'] = readingID;
+//     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
+//         const string = 'spread-' + (i + 1);
+//         const btn = document.getElementById(string);
+//     }
+//     body = addIfPresent(body, );
+//     console.log('reading_cards json body complete:')
+//     console.log(body);
+//     return body;
+// }
+
+// Helper function for json-building functions
+function addIfPresent(body, elementID, tableDataType) {
+    const dataType = tableDataType ?? elementID;
+    const element = document.getElementById(elementID);
+    if (element.value != null && element.value.trim() != "") {
+        body[dataType] = element.value.trim();
+    }
+    return body;
+}
+
+
+// Submit the user's input to the DB
+async function submitNewReading() {
+    const url1 = 'http://localhost:3000/api/v1/readings';
+    const url2 = 'http://localhost:3000/api/v1/reading_cards';
+    let json = makeReadingBody();
+    try {
+        const response1 = await fetch(url1, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify(json)
+        });
+        if (!response1.ok) {
+            throw new Error(`Response status: ${response1.status}`);
+        }
+        const result = await response1.json();
+        console.log(result.id)
+        // json = makeReadingCardBody(result.id);
+        // console.log(json);
+        // const response2 = await fetch(url2, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json", },
+        //     body: JSON.stringify(json)
+        // })
+        // if (!response2.ok) {
+        //     throw new Error(`Response status: ${response2.status}`);
+        // }
+
+        //get the above reading id, use it in the next fetch?
+
+
+        // console.log(result)
+        // console.log(response1)
+    } catch (error) {
+        console.error(error.message);
     }
 }
 
