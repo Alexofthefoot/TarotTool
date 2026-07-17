@@ -1,4 +1,7 @@
 # TarotTool
+A full-stack web application for logging, organizing, and reviewing tarot readings.
+> **Project Status:** Active development. This project is functional in parts but is not feature complete.
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -10,65 +13,66 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#installation">Installation</a></li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#features">Features</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#current">Current</a></li>
+        <li><a href="#planned">Planned</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 ## About the Project
-Please be aware TarotTool is still a work in progress and is not yet ready for public use. 
+TarotTool is a web application designed to help users record tarot readings in a structured way. Rather than keeping readings in notebooks or scattered notes, the application stores them in a searchable database, making it easier to revisit past readings and identify patterns over time.
 
-In its finished state, TarotTool will help users log and organize their tarot readings. Future features will include the ability to explore common trends and changes over time. 
+The long-term goal is to provide tools for exploring recurring cards and trends across a user's reading history.
 
-## Built With
+### Built With
 - HTML
 - CSS
 - JavaScript
+- Node.js
+- Express
 - SQLite
 
-
-what it does and why it exists
-
-## Getting Started
-### Prerequisites
-- (list here)
-* npm
-```sh
-npm install __________
+## Installation
+1. Clone the repository.
+```bash
+git clone git@github.com:Alexofthefoot/TarotTool.git
+```
+2. Navigate into the project directory.
+```bash
+cd TarotTool
+```
+3. Install dependencies.
+```bash
+npm install
+```
+4. Start the application.
+```bash
+npm start
 ```
 
-### Installation
-1. Clone the repo
+## Features
 
+### Current
+- Create new readings through the web interface
+- View existing readings
+- Store readings in a SQLite database
+- View a randomly generated 'Card of the Day'
 
-
-install packages
-
-etc
-
-## usage 
-
-## Roadmap
-- [ ] Enter new readings via online form
-- [x] Revist existing readings
-- [  ] Choose different ways to sort readings
-
-Brief notes on current status, known bugs, or planned future features.
-
-## License
+### Planned
+- Sort and filter readings
+- Search readings
+- Reading statistics and trend visualization
 
 ## Contact 
-(where to report bugs/request new features)
+Bug reports and feature requests are welcome through the GitHub Issues page.
 
 ## Acknowledgments
-Thanks to Luciella Scarlett at https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0#google_vignette for the image downloads.
+Tarot card images by Luciella Scarlett, released under the CC0 license: https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0.
