@@ -32,6 +32,10 @@ TarotTool is a web application designed to help users record tarot readings in a
 
 The long-term goal is to provide tools for exploring recurring cards and trends across a user's reading history.
 
+
+[Screen recording](https://github.com/user-attachments/assets/65fbf4ca-a270-4253-9133-12f288468555)
+
+
 ### Built With
 - HTML
 - CSS
