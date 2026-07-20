@@ -289,7 +289,6 @@ function verifyInput() {
             return false;
         }
     }
-    console.log('no problems with input');
     return true;
 }
 
@@ -299,26 +298,31 @@ function makeReadingBody() {
     body = addIfPresent(body, 'title');
     body = addIfPresent(body, 'question');
     body = addIfPresent(body, 'interpretation');
-    console.log(body);
     return body;
 }
 
 // Create the json object for the reading_cards POST request 
-// function makeReadingCardBody(readingID) {
-//     console.log('now attempting to make reading_cards json body')
-//     let body = {};
-//     body['reading_id'] = readingID;
-//     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
-//         const string = 'spread-' + (i + 1);
-//         const btn = document.getElementById(string);
-//     }
-//     body = addIfPresent(body, );
-//     console.log('reading_cards json body complete:')
-//     console.log(body);
-//     return body;
-// }
+// Creates 1 json for all 1-5 cards
+// TODO: This counts on the card id being 1 more than its deck order, which works for now
+// but may become a problem later
+function makeReadingCardBody(readingID) {
+    let body = [];
+    let object = {};
+    for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
+        object["reading_id"] = readingID;
+        const spread = 'spread-' + (i + 1);
+        const btn = document.getElementById(spread);
+        const cardID = Number(btn.dataset.deckOrder) + 1;
+        object["card_id"] = cardID;
+        body.push(object);
+        // clear object once added to body
+        object = {};
+    }
+    return body;
+}
 
 // Helper function for json-building functions
+// 3rd parameter is optional
 function addIfPresent(body, elementID, tableDataType) {
     const dataType = tableDataType ?? elementID;
     const element = document.getElementById(elementID);
@@ -335,6 +339,7 @@ async function submitNewReading() {
     const url2 = 'http://localhost:3000/api/v1/reading_cards';
     let json = makeReadingBody();
     try {
+        // First POST - the reading itself (single readings row)
         const response1 = await fetch(url1, {
             method: "POST",
             headers: { "Content-Type": "application/json", },
@@ -345,22 +350,17 @@ async function submitNewReading() {
         }
         const result = await response1.json();
         console.log(result.id)
-        // json = makeReadingCardBody(result.id);
-        // console.log(json);
-        // const response2 = await fetch(url2, {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json", },
-        //     body: JSON.stringify(json)
-        // })
-        // if (!response2.ok) {
-        //     throw new Error(`Response status: ${response2.status}`);
-        // }
-
-        //get the above reading id, use it in the next fetch?
-
-
-        // console.log(result)
-        // console.log(response1)
+        // Second POST - the cards for that reading (multiple reading_cards rows)
+        json = makeReadingCardBody(result.id);
+        console.log(json);
+        const response2 = await fetch(url2, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify(json)
+        })
+        if (!response2.ok) {
+            throw new Error(`Response status: ${response2.status}`);
+        }
     } catch (error) {
         console.error(error.message);
     }
