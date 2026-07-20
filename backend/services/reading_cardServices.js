@@ -5,18 +5,25 @@ const getAllReadingCards = (callback) => {
     db.all(sql, [], callback);
 };
 
-const createReadingCard = (reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection
-    , callback) => {
+const createReadingCard = (readingCardArray, callback) => {
     const sql = `INSERT INTO reading_cards (reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    db.run(sql, [reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection], function (err) {
-            if (err) {
-                callback(err, null);
-            }
-            else {
-                callback(null, { id: this.lastID });
-            }
-        });
+    let completed = [];
+    db.serialize(() => {
+        for (const readingCard of readingCardArray) {
+            db.run(sql, [readingCard.reading_id, readingCard.card_id, readingCard.position_number, readingCard.position_name, readingCard.is_reversed,
+            readingCard.notes, readingCard.interpretation, readingCard.reflection], function (err) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                }
+                completed.push(this.lastID);
+                if (completed.length === readingCardArray.length) {
+                    callback(null, { Inserted: completed });
+                }
+            });
+        }
+    });
 };
 
 const deleteReadingCard = (id, callback) => {
@@ -28,7 +35,7 @@ const deleteReadingCard = (id, callback) => {
 
 const reading_cardServices = {
     getAllReadingCards,
-    createReadingCard, 
+    createReadingCard,
     deleteReadingCard
 };
 
