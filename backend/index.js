@@ -17,12 +17,11 @@
 // cardService digs through the filing cabinets and grabs card 1
 // the message travels back to postman who receives the information in a json format.
 
-
-const express = require('express');
-const cors = require('cors');
-const cardRouter  = require('./routes/cardRouter.js');
-const readingRouter = require('./routes/readingRouter.js')
-const reading_cardRouter = require('./routes/reading_cardRouter.js');
+import express from 'express';
+import cors from 'cors';
+import cardRouter from './routes/cardRouter.js';
+import readingRouter from './routes/readingRouter.js';
+import reading_cardRouter from './routes/reading_cardRouter.js';
 
 // CREATE THE EXPRESS APP
 const app = express();

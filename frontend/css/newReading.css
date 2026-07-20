@@ -1,0 +1,329 @@
+/* ==========================================================================
+        OVERALL FORM STYLES
+   ========================================================================== */
+
+#reading-form {
+    max-width: 700px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    margin-top: 8px;
+    color: #c9a7ff;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 16px;
+
+    background: rgba(20, 12, 35, 0.75);
+    color: #e7e1ff;
+
+    border: 1px solid rgba(125, 95, 255, 0.35);
+    border-radius: 10px;
+
+    font: inherit;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 220px;
+    line-height: 1.6;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+.user-note {
+    color: rgba(231, 225, 255, 0.45);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+
+    border-color: #9adbb3;
+
+    box-shadow:
+        0 0 12px rgba(154, 219, 179, 0.25),
+        0 0 20px rgba(125, 95, 255, 0.15);
+
+    background: rgba(30, 18, 48, 0.9);
+}
+
+/* ==========================================================================
+        NUMERAL BUTTONS
+   ========================================================================== */
+/* .reading-form is flex column, so this is a flex row within that column */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.button-row button {
+    min-width: 130px;
+}
+
+/* ==========================================================================
+        SPREAD BUTTONS & LABELS
+   ========================================================================== */
+
+.spread-buttons {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spread-buttons img {
+    display: block;
+    width: 120px;
+    height: auto;
+}
+
+.spread-buttons:hover {
+    transform: translateY(-4px);
+}
+
+.spread-board {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.spread-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-position-label {
+    color: #c9a7ff;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.85;
+
+    text-align: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+
+    min-width: 80px;
+    transition: 0.2s;
+    outline: none;
+}
+
+.card-position-label:hover {
+    background: rgba(125, 95, 255, 0.1);
+    cursor: text;
+}
+
+.card-position-label:focus {
+    background: rgba(30, 18, 48, 0.9);
+    border: 1px solid rgba(154, 219, 179, 0.4);
+    box-shadow: 0 0 12px rgba(154, 219, 179, 0.15);
+}
+
+/* ==========================================================================
+        MODAL WINDOW
+   ========================================================================== */
+
+
+/* The Modal (background) taken from w3schools*/
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    background: rgba(5, 5, 15, 0.65);
+    backdrop-filter: blur(6px);
+}
+
+/* Modal Content/Box */
+.modal-content {
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    
+    position: relative;
+
+    width: min(600px, 90%);
+    padding: 30px;
+
+    background: rgba(10, 5, 20, 0.75);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(125, 95, 255, 0.25);
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 30px rgba(125, 95, 255, 0.25),
+        0 0 60px rgba(0, 0, 0, 0.5);
+
+    color: #e7e1ff;
+}
+/* Choosing images or text based */
+.display-options {
+    display: inline-flex;
+    margin: 15px 0 20px;
+}
+.display-options input[type="radio"] {
+    display: none;
+}
+.display-options label {
+    padding: 8px 18px;
+
+    background: rgba(125, 95, 255, 0.08);
+    color: #b8aedf;
+
+    border: 1px solid rgba(125, 95, 255, 0.25);
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: 0.2s ease;
+}
+.display-options label:first-of-type {
+    border-radius: 8px 0 0 8px;
+}
+
+.display-options label:last-of-type {
+    border-radius: 0 8px 8px 0;
+    border-left: none;
+}
+
+.display-options input[type="radio"]:checked + label {
+    background: rgba(125, 95, 255, 0.35);
+    color: #e7e1ff;
+    border-color: #9adbb3;
+
+    box-shadow: 0 0 12px rgba(154, 219, 179, 0.25);
+}
+.display-options label:hover {
+    background: rgba(125,95, 255, 0.18);
+}
+
+/* which card category/suit (eg. Major arcana, swords, etc */
+.data-type-selection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.data-type-selection button:active {
+    background: rgba(125, 95 ,255, 0.35);
+    color: #e7e1ff;
+    border-color: #9adbb3;
+}
+
+/* The Close Button */
+.close {
+    color: rgba(125, 95, 255, 0.25);
+    font-size: 28px;
+    font-weight: bold;
+
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
+
+.close:hover,
+.close:focus {
+    border-color: white;
+    border: 1px solid #9adbb3;
+    border-radius: 6px;
+
+    color: #e7e1ff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 102px);
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.card-selection-btn {
+    justify-content: center;
+    background: rgba(125, 95, 255, 0.12);
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid rgba(125, 95, 255, 0.35);
+    border-radius: 3px;
+
+    color: #e7e1ff;
+
+    transition: 0.2s;
+}
+
+/*  TODO: 
+    Revisit the size/shape/background color of these buttons.
+*/
+.card-btn-as-text {
+    height: 175px;
+    /* height: 100px; */
+    width: 100px;
+}
+
+.card-selection-btn img {
+    display: block;
+    width: 100px;
+    height: auto;
+}
+
+.card-selection-btn:hover {
+    transform: translateY(-2px);
+
+    border-color: #9adbb3;
+
+    box-shadow: 0 0 15px rgba(154, 219, 179, 0.3);
+}

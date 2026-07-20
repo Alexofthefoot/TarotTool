@@ -1,22 +1,29 @@
-const db = require('../database');
+import db from '../database.js';
 
 const getAllReadingCards = (callback) => {
     const sql = `SELECT * FROM reading_cards`;
     db.all(sql, [], callback);
 };
 
-const createReadingCard = (reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection
-    , callback) => {
+const createReadingCard = (readingCardArray, callback) => {
     const sql = `INSERT INTO reading_cards (reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    db.run(sql, [reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection], function (err) {
-            if (err) {
-                callback(err, null);
-            }
-            else {
-                callback(null, { id: this.lastID });
-            }
-        });
+    let completed = [];
+    db.serialize(() => {
+        for (const readingCard of readingCardArray) {
+            db.run(sql, [readingCard.reading_id, readingCard.card_id, readingCard.position_number, readingCard.position_name, readingCard.is_reversed,
+            readingCard.notes, readingCard.interpretation, readingCard.reflection], function (err) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                }
+                completed.push(this.lastID);
+                if (completed.length === readingCardArray.length) {
+                    callback(null, { Inserted: completed });
+                }
+            });
+        }
+    });
 };
 
 const deleteReadingCard = (id, callback) => {
@@ -26,8 +33,10 @@ const deleteReadingCard = (id, callback) => {
     });
 }
 
-module.exports = {
+const reading_cardServices = {
     getAllReadingCards,
-    createReadingCard, 
+    createReadingCard,
     deleteReadingCard
 };
+
+export default reading_cardServices

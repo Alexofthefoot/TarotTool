@@ -1,4 +1,4 @@
-const db = require('../database');
+import db from '../database.js';
 // db.run() for state changes, returns metadata
 // db.get() for retreiving exactly 1 row,
 // db. all() for retreiving array of rows
@@ -8,9 +8,9 @@ const getAllReadings = (limit, offset, callback) => {
     db.all(sql, [limit, offset], callback);
 };
 
-const createReading = (title, question, notes, callback) => {
-    const sql = `INSERT INTO readings (title, question, notes) VALUES (?, ?, ?)`;
-    db.run(sql, [title, question, notes], function(err) {
+const createReading = (title, question, interpretation, callback) => {
+    const sql = `INSERT INTO readings (title, question, interpretation) VALUES (?, ?, ?)`;
+    db.run(sql, [title, question, interpretation], function(err) {
         if (err) {
             callback(err, null);
         } 
@@ -25,9 +25,9 @@ const getReading = (id, callback) => {
     db.get(sql, [id], callback);
 };
 
-const updateReading = (id, title, question, notes, callback) => {
-    const sql = `UPDATE readings SET title = ?, question = ?, notes = ? WHERE id = ?`;
-    db.run(sql, [title, question, notes, id], function (err) {
+const updateReading = (id, title, question, interpretation, callback) => {
+    const sql = `UPDATE readings SET title = ?, question = ?, interpretation = ? WHERE id = ?`;
+    db.run(sql, [title, question, interpretation, id], function (err) {
         callback(err, { changes: this.changes });
     });
 };
@@ -52,11 +52,13 @@ const getCardsPerReading = (id, callback) => {
     db.all(sql, [id], callback);
 }
 
-module.exports = {
+const readingServices =  {
     getAllReadings,
     createReading,
     getReading,
     updateReading,
     deleteReading, 
     getCardsPerReading
-}
+};
+
+export default readingServices

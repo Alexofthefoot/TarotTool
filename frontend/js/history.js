@@ -56,8 +56,8 @@ async function showMore() {
         p1.className = "question";
         p1.innerHTML = readings[i].question;
         const p2 = document.createElement("p");
-        p2.className = "notes"
-        p2.innerHTML = readings[i].notes;
+        p2.className = "interpretation"
+        p2.innerHTML = readings[i].interpretation;
         newDiv.appendChild(p1);
         newDiv.appendChild(p2);
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/newReading.css">
+    <script type="module" defer src="js/newReading.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">🔮 Your Tarot Journal</div>
+
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Cards</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="newReading.html">New</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Save Reading</h1>
+        </header>
+
+
+        <section>
+            <form id="reading-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="eg. 'Daily Card Draw', 'Career Question'">
+                    <label for="question">Question</label>
+                    <input type="text" id="question" name="question" placeholder="What guidance are you seeking?">
+                </div>
+                <div class="form-group">
+                    <label for="number-of-cards">Number of Cards</label>
+                    <div id="number-button-row" class="button-row">
+                        <button type="button">1</button>
+                        <button type="button">2</button>
+                        <button type="button">3</button>
+                        <button type="button">4</button>
+                        <button type="button">5</button>
+                    </div>
+                    <br>
+
+
+                    <div class="spread-board" id="spreadBoard">
+                        <div class="spread-slot">
+                            <button id="spread-1" class="spread-buttons" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Past</div>
+                        </div>
+
+                        <div class="spread-slot">
+                            <button id="spread-2" class="spread-buttons" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Present</div>
+                        </div>
+
+                        <div class="spread-slot">
+                            <button id="spread-3" class="spread-buttons" type="button">
+                                <img src="../frontend/assets/Cards-png/CardBacks.png">
+                            </button>
+                            <div class="card-position-label" contenteditable="true">Future</div>
+                        </div>
+
+                    </div>
+                    <div class="control-buttons">
+                        <br>
+                        <button id="clear-position" type="button">Clear Position
+                            Names</button>
+                        <button id="reset-position" type="button">Reset to Default</button>
+                        <p class="user-note">Defaults are editable in user settings</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interpretation">Interpretation</label>
+                    <textarea id="interpretation" name="interpretation" rows="10"
+                        placeholder="Record your interpretation..."></textarea>
+                </div>
+
+                <button type="submit">Save Reading</button>
+            </form>
+        </section>
+    </main>
+
+
+    <div id="modal-window" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <span class="close" id="close-modal">&times;</span>
+
+            <div class="display-options">
+                <input type="radio" id="display-images" name="display" value="images">
+                <label for="display-images">Images</label>
+                <input type="radio" id="display-text" name="display" value="text">
+                <label for="display-text">Text</label>
+            </div>
+
+            <div class="data-type-selection" id="suit-selection-container">
+                <button type="button" data-type="major" id="major-selection">Major Arcana</button>
+                <button type="button" data-type="wands" id="wands-selection">Wands</button>
+                <button type="button" data-type="cups" id="cups-selection">Cups</button>
+                <button type="button" data-type="swords" id="swords-selection">Swords</button>
+                <button type="button" data-type="pentacles" id="pentacles-selection">Pentacles</button>
+            </div>
+            <div class="card-selection" id="card-selection-container">
+                <!-- this will be put in dynamically in the final produt -->
+                <!-- <button class="card-selection-btn" data-card="Ace of Cups" data-deckOrder="36">
+                    <img src="assets/Cards-png/Cups01.png" alt="Ace of Cups">
+                </button> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

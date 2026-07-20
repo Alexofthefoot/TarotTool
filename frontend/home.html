@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tarot</title>
     <link rel="stylesheet" href="css/style.css">
-        <script src="js/home.js"></script>
+    <script src="js/home.js"></script>
 </head>
 
 <body>
@@ -17,26 +17,28 @@
         <ul class="nav-links">
             <li><a href="home.html">Home</a></li>
             <li><a href="#">Cards</a></li>
-            <li><a href="readings.html">Reading</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="newReading.html">New</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
 
     <main>
         <header>
-        <h1>Daily Tarot Draw</h1>
-        <p>Draw a card and reflect on its meaning for today.</p>
-    </header>
+            <h1>Daily Tarot Draw</h1>
+            <p>Draw a card and reflect on its meaning for today.</p>
+        </header>
 
-    <div class="controls">
-        <button id="draw-card-btn" onclick="randomDraw()">Draw Card of the Day</button>
-    </div>
+        <div class="controls">
+            <button id="draw-card-btn" onclick="randomDraw()">Draw Card of the Day</button>
+        </div>
 
-    <section class="card-display">
-        <h2 id="card-of-the-day-reveal">Your Card Will Appear Here</h2>
-        <p>Click the button above to reveal a card.</p>
-        <img id="card-of-the-day-image" display="none">
-    </section>
+        <section class="card-display">
+            <h2 id="card-of-the-day-reveal">Your Card Will Appear Here</h2>
+            <p>Click the button above to reveal a card.</p>
+            <img id="card-of-the-day-image" display="none">
+        </section>
     </main>
 </body>
+
 </html>

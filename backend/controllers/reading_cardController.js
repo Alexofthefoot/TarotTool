@@ -1,4 +1,4 @@
-const reading_cardServices = require('../services/reading_cardServices');
+import reading_cardServices from '../services/reading_cardServices.js';
 
 function getAllReadingCards(req, res) {
     reading_cardServices.getAllReadingCards((err, rows) => {
@@ -12,15 +12,17 @@ function getAllReadingCards(req, res) {
 };
 
 function createReadingCard(req, res) {
-    const { reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection } = req.body;
-    reading_cardServices.createReadingCard(reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection, (err, data) => {
+    // Normalize input to handle either single object or array
+    const readingCards = Array.isArray(req.body) ? req.body : [req.body];
+    // const { reading_id, card_id, position_number, position_name, is_reversed, notes, interpretation, reflection } = readingCard;
+    reading_cardServices.createReadingCard(readingCards, (err, data) => {
         if (err) {
             res.status(500).send(err.message);
         }
         else {
             res.status(200).json(data);
         }
-    })
+    });
 };
 
 function deleteReadingCard(req, res) {
@@ -37,8 +39,10 @@ function deleteReadingCard(req, res) {
     })
 };
 
-module.exports = {
+const reading_cardController = {
     getAllReadingCards,
     createReadingCard,
     deleteReadingCard
-}
+};
+
+export default reading_cardController

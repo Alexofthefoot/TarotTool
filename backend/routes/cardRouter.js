@@ -1,8 +1,8 @@
 // Router says:  "That's a DELETE on /:id, talk to deleteOne."
 // router is kinda like the receptionist, it just directs messages for this (card) department 
 // of the big office
-const express = require('express');
-const cardController = require('../controllers/cardController');
+import express from 'express';
+import cardController from '../controllers/cardController.js';
 
 const cardRouter = express.Router();
 cardRouter.route('/')
@@ -17,4 +17,4 @@ cardRouter.route('/:id')
 .put(cardController.updateCard)
 .delete(cardController.deleteCard);
 
-module.exports = cardRouter;
+export default cardRouter

@@ -7,7 +7,7 @@
 // callbacks or raw DB results
 // no req, no res
 
-const db = require('../database')
+import db from '../database.js';
 
 const getAllCards = (callback) => {
     const sql = `SELECT * FROM cards`;
@@ -45,7 +45,7 @@ const deleteCard = (id, callback) => {
     });
 }
 
-module.exports = {
+const cardServices = {
     getAllCards,
     createCard,
     getRandomCard,
@@ -53,3 +53,5 @@ module.exports = {
     updateCard,
     deleteCard
 };
+
+export default cardServices

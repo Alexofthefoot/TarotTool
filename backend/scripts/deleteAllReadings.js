@@ -1,4 +1,4 @@
-const db = require('../database');
+import db from '../database.js';
 
 // Use with care!
 db.run(`DELETE FROM reading_cards`);
