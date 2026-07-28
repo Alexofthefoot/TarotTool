@@ -274,22 +274,57 @@ function setModalCards(cardID) {
 // TODO:
 // For now this works, but think about weird edgecases like "    "
 function verifyInput() {
-    // A reading requires a question
+    // start out by resetting the summary to hidden
+    showSummary(false);
+    let questionOK = true;
+    let cardsOK = true;
+    // Ensure the reading contains a question
     const question = document.getElementById('question').value;
     if (question === null || question === "") {
-        console.log('Reading does not have a question')
-        return false;
+        console.log('Reading does not have a question');
+        questionOK = false;
+        showSummaryDetails('question');
     }
+  
+    // Ensure the reading contains all valid cards
     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
         const string = 'spread-' + (i + 1);
         const btn = document.getElementById(string);
         //And all the cards in the spread to be drawn and non-null
         if (btn.dataset.deckOrder === undefined || btn.dataset.deckOrder === null) {
             console.log('card ' + (i + 1) + ' has not been selected.')
-            return false;
+            cardsOK = false;
+            showSummaryDetails('cards');
         }
     }
-    return true;
+    if (!questionOK || !cardsOK) {
+        showSummary(true);
+    }
+
+    return (questionOK && cardsOK);
+}
+
+function showSummary(ifShow) {
+    if (!ifShow) {
+        document.getElementById('form-summary').style.display = 'none';
+        document.getElementById('error-question').style.display = 'none';
+        document.getElementById('error-cards').style.display = 'none';
+        console.log('reseting the summary, everything is good')
+    }
+    else {
+        // Display the red error message box to the user
+        const div = document.getElementById('form-summary');
+        div.style.display = 'block';
+        console.log('showing the sumamry block');
+    }
+
+}
+
+// Display the cards/question error message to the user
+function showSummaryDetails(elementName) {
+    const id = 'error-' + elementName;
+    const p = document.getElementById(id);
+    p.style.display = 'block';
 }
 
 // Create the json object for the reading POST request 
