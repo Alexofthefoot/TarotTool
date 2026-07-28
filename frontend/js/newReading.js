@@ -40,6 +40,7 @@ function setupGeneralEventHandlers() {
         event.preventDefault(); // Stop reload
         if (verifyInput()) {
             await submitNewReading();
+             window.location.reload();
         }
         else {
             console.log('missing input, not awaiting')
