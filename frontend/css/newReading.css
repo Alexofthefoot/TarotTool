@@ -74,6 +74,18 @@
     background: rgba(30, 18, 48, 0.9);
 }
 
+#form-summary {
+    display: none;
+    border: 1px solid #6b2209;
+    background-color: #200902;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+#form-summary p {
+    display: none;
+}
+
 /* ==========================================================================
         NUMERAL BUTTONS
    ========================================================================== */
