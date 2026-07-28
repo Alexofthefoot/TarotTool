@@ -285,13 +285,16 @@ function verifyInput() {
         questionOK = false;
         showSummaryDetails('question');
     }
-  
     // Ensure the reading contains all valid cards
     for (let i = 0; i < CURRENT_NUMBER_OF_CARDS; i++) {
         const string = 'spread-' + (i + 1);
         const btn = document.getElementById(string);
         //And all the cards in the spread to be drawn and non-null
-        if (btn.dataset.deckOrder === undefined || btn.dataset.deckOrder === null) {
+        if (btn.dataset.deckOrder === undefined || 
+            btn.dataset.deckOrder === null ||
+            btn.dataset.deckOrder === "null" ||
+            btn.dataset.deckOrder === ""
+        ) {
             console.log('card ' + (i + 1) + ' has not been selected.')
             cardsOK = false;
             showSummaryDetails('cards');
